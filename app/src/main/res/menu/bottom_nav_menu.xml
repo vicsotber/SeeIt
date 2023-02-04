@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_funcionalidades"
-        android:icon="@drawable/vr_glasses_goggles_headset_user_svgrepo_com"
+        android:icon="@drawable/ic_vector_funcionalidades"
         android:title="@string/title_funcionalidades" />
 
     <item

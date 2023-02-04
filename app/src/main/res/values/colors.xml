@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_red">#EF7375</color>
+    <color name="escena_icon_fondo">#554343</color>
 </resources>

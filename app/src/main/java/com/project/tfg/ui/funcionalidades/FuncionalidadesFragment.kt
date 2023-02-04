@@ -28,10 +28,10 @@ class FuncionalidadesFragment : Fragment() {
         _binding = FragmentFuncionalidadesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        //val funcionalidad_escena_nombre: TextView = binding.textHome
+        //homeViewModel.text.observe(viewLifecycleOwner) {
+        //    funcionalidad_escena_nombre.text = it
+        //}
         return root
     }
 

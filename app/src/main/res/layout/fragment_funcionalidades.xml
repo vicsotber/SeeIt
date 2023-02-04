@@ -6,28 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".ui.funcionalidades.FuncionalidadesFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <View
+        android:id="@+id/view"
+        android:layout_width="144dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/descripción_escenas"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="98dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="56dp"
-        android:src="@drawable/vr_glasses_goggles_headset_user_svgrepo_com"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/funcionalidad_escena_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/descripción_escenas"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="143dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/descripción_categorias"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.695"
+        app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/funcinalidad_texto_img"
+        android:layout_width="96dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:background="#D2B8DA"
+        android:src="@drawable/ic_vector_texto"
+        tools:ignore="ContentDescription"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@id/view3" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="144dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="232dp"
+        android:clickable="true"
+        android:contentDescription="@string/descripción_texto"
+        android:focusable="true"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/funcionalidad_texto_nombre"
+        android:layout_width="64dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/descripción_texto"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/view3" />
+
+    <ImageView
+        android:id="@+id/funcionalidad_escena_img"
+        android:layout_width="96dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/escena_icon_fondo"
+        android:src="@drawable/ic_vector_landscape"
+        tools:ignore="ContentDescription"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/funcionalidad_categorias_img"
+        android:layout_width="96dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_vector_tags"
+        tools:ignore="ContentDescription"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/funcionalidad_categorias_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/descripción_categorias"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

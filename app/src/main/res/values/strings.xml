@@ -2,4 +2,7 @@
     <string name="app_name">Prueba</string>
     <string name="title_funcionalidades">Funcionalidades</string>
     <string name="title_registros">Registros</string>
+    <string name="descripción_escenas">Escena</string>
+    <string name="descripción_texto">Texto</string>
+    <string name="descripción_categorias">Categorías</string>
 </resources>
