@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Prueba</string>
+    <string name="title_funcionalidades">Funcionalidades</string>
+    <string name="title_registros">Registros</string>
+</resources>
