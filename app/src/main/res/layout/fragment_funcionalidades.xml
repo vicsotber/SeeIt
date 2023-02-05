@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.funcionalidades.FuncionalidadesFragment">
+    tools:context="com.project.tfg.ui.funcionalidades.FuncionalidadesFragment">
 
     <View
         android:id="@+id/view"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/descripción_escenas"
+        android:text="@string/nombre_funcionalidad_escenas"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view" />
@@ -73,7 +73,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/descripción_texto"
+        android:text="@string/nombre_funcionalidad_texto"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3" />
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/descripción_categorias"
+        android:text="@string/nombre_funcionalidad_categorias"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/view2" />

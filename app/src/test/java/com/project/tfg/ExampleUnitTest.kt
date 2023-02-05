@@ -1,4 +1,4 @@
-package com.example.tfg
+package com.project.tfg
 
 import org.junit.Test
 

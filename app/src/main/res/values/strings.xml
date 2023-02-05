@@ -2,7 +2,14 @@
     <string name="app_name">Prueba</string>
     <string name="title_funcionalidades">Funcionalidades</string>
     <string name="title_registros">Registros</string>
-    <string name="descripción_escenas">Escena</string>
-    <string name="descripción_texto">Texto</string>
-    <string name="descripción_categorias">Categorías</string>
+    <string name="descripción_escenas">Funcionalidad Escena: Selecciona esta
+        funcionalidad para obtener la descripción de una escena a partir de una imagen
+    </string>
+    <string name="nombre_funcionalidad_escenas">Escena</string>
+    <string name="descripción_texto">Funcionalidad Texto: Selecciona esta funcionalidad
+         para que el texto en una imagen sea leído en voz alta</string>
+    <string name="nombre_funcionalidad_texto">Texto</string>
+    <string name="descripción_categorias">Funcionalidad Categorías: Selecciona esta
+        funcionalidad para identificar un objeto entre una serie de categorías</string>
+    <string name="nombre_funcionalidad_categorias">Categorías</string>
 </resources>

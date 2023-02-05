@@ -1,4 +1,4 @@
-package com.example.tfg.ui.registros
+package com.project.tfg.ui.registros
 
 import android.os.Bundle
 import android.view.LayoutInflater

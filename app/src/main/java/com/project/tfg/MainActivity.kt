@@ -1,4 +1,4 @@
-package com.example.tfg
+package com.project.tfg
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.tfg.R
 import com.example.tfg.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Pone el logo de la app en la Action Bar superior
+        //supportActionBar?.setDisplayShowHomeEnabled(true)
+        //supportActionBar?.setIcon(R.mipmap.ic_launcher_eye_round)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

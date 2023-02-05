@@ -1,4 +1,4 @@
-package com.example.tfg.ui.registros
+package com.project.tfg.ui.registros
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

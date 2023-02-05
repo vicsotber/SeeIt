@@ -1,4 +1,4 @@
-package com.example.tfg.ui.funcionalidades
+package com.project.tfg.ui.funcionalidades
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
