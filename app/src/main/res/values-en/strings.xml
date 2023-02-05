@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prueba</string>
+    <string name="title_funcionalidades">Functionalities</string>
+    <string name="title_registros">Records</string>
+    <string name="descripción_escenas">Functionality Scene: Select this functionality to
+        obtain the description of a scene from an image
+    </string>
+    <string name="nombre_funcionalidad_escenas">Scene</string>
+    <string name="descripción_texto">Functionality Text: Select this functionality to
+        get the text from an image read outloud</string>
+    <string name="nombre_funcionalidad_texto">Text</string>
+    <string name="descripción_categorias">Functionality Categories: Select this
+        functionality to identify an object among a series of categories</string>
+    <string name="nombre_funcionalidad_categorias">Categories</string>
+</resources>
