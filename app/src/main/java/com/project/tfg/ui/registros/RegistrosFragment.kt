@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tfg.databinding.FragmentRegistrosBinding
+import com.project.tfg.databinding.FragmentRegistrosBinding
 
 class RegistrosFragment : Fragment() {
 

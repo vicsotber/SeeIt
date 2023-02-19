@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.tfg.R
-import com.example.tfg.databinding.FragmentFuncionalidadesBinding
+import com.project.tfg.R
+import com.project.tfg.databinding.FragmentFuncionalidadesBinding
 
 class FuncionalidadesFragment : Fragment() {
 
@@ -23,16 +23,8 @@ class FuncionalidadesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        //val homeViewModel =
-        //    ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentFuncionalidadesBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        //val funcionalidad_escena_nombre: TextView = binding.textHome
-        //homeViewModel.text.observe(viewLifecycleOwner) {
-        //    funcionalidad_escena_nombre.text = it
-        //}
 
         return root
     }
@@ -49,6 +41,11 @@ class FuncionalidadesFragment : Fragment() {
             val categorias = Intent(this.context, CategoriasActivity::class.java)
             startActivity(categorias)
         })
-    }
 
+        val textoView: View? = view?.findViewById(R.id.TextoView)
+        textoView?.setOnClickListener(View.OnClickListener {
+            val texto = Intent(this.context, TextoActivity::class.java)
+            startActivity(texto)
+        })
+    }
 }

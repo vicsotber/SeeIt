@@ -2,7 +2,7 @@ package com.project.tfg.ui.funcionalidades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tfg.R
+import com.project.tfg.R
 
 class CategoriasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

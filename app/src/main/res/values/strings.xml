@@ -12,4 +12,11 @@
     <string name="descripción_categorias">Funcionalidad Categorías: Selecciona esta
         funcionalidad para identificar un objeto entre una serie de categorías</string>
     <string name="nombre_funcionalidad_categorias">Categorías</string>
+
+    <string name="texto_dialog_title">Elige una modalidad</string>
+    <string name="texto_dialog_cuerpo">¿Desea analizar una imagen de su galería o hacer una foto ahora?</string>
+    <string name="texto_dialog_opcion_galeria">Galería</string>
+    <string name="texto_dialog_opcion_camara">Cámara</string>
+    <string name="imagen_placeholder_descripcion">Aquí aparecerá la imagen que desea analizar</string>
+    <string name="texto_resultado">Resultado</string>
 </resources>

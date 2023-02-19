@@ -13,4 +13,11 @@
     <string name="descripción_categorias">Functionality Categories: Select this
         functionality to identify an object among a series of categories</string>
     <string name="nombre_funcionalidad_categorias">Categories</string>
+
+    <string name="texto_dialog_title">Select a modality</string>
+    <string name="texto_dialog_cuerpo">Would you like to analyze an image from your gallery or take a photo now?</string>
+    <string name="texto_dialog_opcion_galeria">Gallery</string>
+    <string name="texto_dialog_opcion_camara">Camera</string>
+    <string name="imagen_placeholder_descripcion">The image to be analyzed is displayed here</string>
+    <string name="texto_resultado">Result</string>
 </resources>
