@@ -1,13 +1,16 @@
 package com.project.tfg
 
+import android.content.res.Configuration
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.project.tfg.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 

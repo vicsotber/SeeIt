@@ -18,6 +18,12 @@
     <string name="texto_dialog_cuerpo">Would you like to analyze an image from your gallery or take a photo now?</string>
     <string name="texto_dialog_opcion_galeria">Gallery</string>
     <string name="texto_dialog_opcion_camara">Camera</string>
+    <string name="texto_dialog_opcion_cancelar">Cancel</string>
     <string name="imagen_placeholder_descripcion">The image to be analyzed is displayed here</string>
     <string name="texto_resultado">Result</string>
+    <string name="permisos_no_concedidos">Camera or storage access permissions are needed to make use of this functionality</string>
+
+    <string name="text_recognition_error">There has been an error with the text recognition</string>
+
+    <string name="button_foto">Take photo</string>
 </resources>

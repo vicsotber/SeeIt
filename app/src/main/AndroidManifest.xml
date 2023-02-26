@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,18 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG"
         tools:targetApi="31">
-        <!--<meta-data
-            android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="ocr" />-->
         <activity
-            android:name="com.project.tfg.ui.funcionalidades.TextoActivity"
-            android:exported="false">
+            android:name=".ui.funcionalidades.CamaraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <!--
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
+        -->
+        <activity
+            android:name=".ui.funcionalidades.TextoActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.project.tfg.ui.funcionalidades.CategoriasActivity"
+            android:name=".ui.funcionalidades.CategoriasActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

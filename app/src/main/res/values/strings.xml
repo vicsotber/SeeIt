@@ -17,6 +17,12 @@
     <string name="texto_dialog_cuerpo">¿Desea analizar una imagen de su galería o hacer una foto ahora?</string>
     <string name="texto_dialog_opcion_galeria">Galería</string>
     <string name="texto_dialog_opcion_camara">Cámara</string>
+    <string name="texto_dialog_opcion_cancelar">Cancelar</string>
     <string name="imagen_placeholder_descripcion">Aquí aparecerá la imagen que desea analizar</string>
     <string name="texto_resultado">Resultado</string>
+    <string name="permisos_no_concedidos">Se necesitan permisos para acceder a la cámara o al almacenamiento para hacer uso de esta funcionalidad</string>
+
+    <string name="text_recognition_error">Se ha producido un error con el reconocimiento de texto</string>
+
+    <string name="button_foto">Hacer foto</string>
 </resources>
