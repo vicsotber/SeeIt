@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Prueba</string>
+    <string name="app_name">SeeIt</string>
     <string name="title_funcionalidades">Functionalities</string>
     <string name="title_registros">Records</string>
     <string name="descripción_escenas">Functionality Scene: Select this functionality to
