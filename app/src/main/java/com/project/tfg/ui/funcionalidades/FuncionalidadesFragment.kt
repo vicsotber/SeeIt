@@ -47,5 +47,11 @@ class FuncionalidadesFragment : Fragment() {
             val texto = Intent(this.context, TextoActivity::class.java)
             startActivity(texto)
         })
+
+        val escenaView: View? = view?.findViewById(R.id.EscenaView)
+        escenaView?.setOnClickListener(View.OnClickListener {
+            val escena = Intent(this.context, EscenaActivity::class.java)
+            startActivity(escena)
+        })
     }
 }
