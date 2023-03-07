@@ -26,4 +26,9 @@
     <string name="text_recognition_error">There has been an error with the text recognition</string>
 
     <string name="button_foto">Take photo</string>
+
+    <string name="escena_resultado_descripcion">Image description: </string>
+    <string name="escena_resultado_objetos">Objects detected in the image: </string>
+    <string name="escena_resultado_etiquetas">Tags detected for this image: </string>
+    <string name="scene_description_error">There has been an error while getting the image description</string>
 </resources>

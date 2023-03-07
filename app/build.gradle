@@ -3,6 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def getApiKey() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
+    return properties.getProperty("AZURE_API_KEY")
+}
+
 android {
     namespace 'com.project.tfg'
     compileSdk 33
@@ -15,6 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "AZURE_API_KEY", getApiKey())
     }
 
     buildTypes {
@@ -51,6 +59,9 @@ dependencies {
 
     implementation 'com.google.mlkit:text-recognition:16.0.0-beta6'
     implementation 'com.google.mlkit:image-labeling:17.0.7'
+    implementation 'com.theokanning.openai-gpt3-java:service:0.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     def camerax_version = "1.2.1"
     implementation "androidx.camera:camera-core:${camerax_version}"
