@@ -41,6 +41,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
 }
 
 dependencies {
@@ -62,6 +66,8 @@ dependencies {
     implementation 'com.theokanning.openai-gpt3-java:service:0.10.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.mlkit:translate:17.0.1'
+    implementation 'com.google.mlkit:image-labeling-custom:17.0.1'
 
     def camerax_version = "1.2.1"
     implementation "androidx.camera:camera-core:${camerax_version}"

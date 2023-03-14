@@ -3,7 +3,6 @@ package com.project.tfg.ui.funcionalidades
 import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
@@ -57,7 +56,9 @@ class TextoActivity : BaseActivity() {
 
             }
             .addOnFailureListener { _ ->
-                Toast.makeText(this, R.string.text_recognition_error, Toast.LENGTH_SHORT).show()
+                val text: TextView = findViewById(R.id.texto_resultado)
+                text.text = getString(R.string.text_recognition_error)
+                convertTextToSpeech(getString(R.string.text_recognition_error))
             }
     }
 

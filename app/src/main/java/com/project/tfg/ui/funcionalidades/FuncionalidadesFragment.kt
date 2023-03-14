@@ -53,5 +53,11 @@ class FuncionalidadesFragment : Fragment() {
             val escena = Intent(this.context, EscenaActivity::class.java)
             startActivity(escena)
         })
+
+        val traduccionView: View? = view?.findViewById(R.id.TraducirView)
+        traduccionView?.setOnClickListener(View.OnClickListener {
+            val traducir = Intent(this.context, TraducirActivity::class.java)
+            startActivity(traducir)
+        })
     }
 }

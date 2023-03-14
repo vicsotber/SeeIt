@@ -12,6 +12,9 @@
     <string name="descripción_categorias">Funcionalidad Categorías: Selecciona esta
         funcionalidad para identificar un objeto entre una serie de categorías</string>
     <string name="nombre_funcionalidad_categorias">Categorías</string>
+    <string name="descripción_traduccion">Funcionalidad Traducción: Selecciona esta
+        funcionalidad para traducir el texto presente en una imagen al idioma que escojas entre los disponibles</string>
+    <string name="nombre_funcionalidad_traduccion">Traducción</string>
 
     <string name="texto_dialog_title">Elige una modalidad</string>
     <string name="texto_dialog_cuerpo">¿Desea analizar una imagen de su galería o hacer una foto ahora?</string>
@@ -29,5 +32,27 @@
     <string name="escena_resultado_descripcion">Descripción de la imagen: </string>
     <string name="escena_resultado_objetos">Objetos detectados en la imagen: </string>
     <string name="escena_resultado_etiquetas">Etiquetas detectadas para esta imagen: </string>
-    <string name="scene_description_error">Se ha producido un error al obtener la descripción de la imagen</string>
+    <string name="scene_description_error">Se ha producido un error al obtener la descripción de la imagen. Asegurate de tener conexión a internet.</string>
+
+    <string-array name="paises">
+        <item>Inglés</item>
+        <item>Francés</item>
+        <item>Alemán</item>
+        <item>Español</item>
+        <item>Catalán</item>
+        <item>Gallego</item>
+        <item>Italiano</item>
+        <item>Neerlandés</item>
+        <item>Árabe</item>
+        <item>Checo</item>
+        <item>Portugués</item>
+    </string-array>
+    <string name="traduccion_resultado">Traducción del texto</string>
+    <string name="traduccion_esperando">Realizando traducción del texto detectado en la imagen. Espere por favor.
+            Si es la primera vez que usa un idioma seleccionado es posible que tarde unos minutos en descargar el modelo de traducción.</string>
+    <string name="boton_traducir">Traducir texto</string>
+    <string name="source_language">Traducir del</string>
+    <string name="target_language">Traducir al</string>
+    <string name="text_translation_error">Ha ocurrido un error durante la traducción del texto</string>
+    <string name="translation_models_error">Se ha producido un error. Es posible que no se tengan los modelos de traducción necesarios. Asegurate de estar conectado a internet via WIFI para descargarlos.</string>
 </resources>

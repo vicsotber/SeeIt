@@ -13,6 +13,9 @@
     <string name="descripción_categorias">Functionality Categories: Select this
         functionality to identify an object among a series of categories</string>
     <string name="nombre_funcionalidad_categorias">Categories</string>
+    <string name="descripción_traduccion">Funcionality Translation: Select this functionality to translate the text
+        appearing inside an image to the selected language among the available ones</string>
+    <string name="nombre_funcionalidad_traduccion">Translation</string>
 
     <string name="texto_dialog_title">Select a modality</string>
     <string name="texto_dialog_cuerpo">Would you like to analyze an image from your gallery or take a photo now?</string>
@@ -30,5 +33,30 @@
     <string name="escena_resultado_descripcion">Image description: </string>
     <string name="escena_resultado_objetos">Objects detected in the image: </string>
     <string name="escena_resultado_etiquetas">Tags detected for this image: </string>
-    <string name="scene_description_error">There has been an error while getting the image description</string>
+    <string name="scene_description_error">There has been an error while getting the image description. Make sure you have internet connection.</string>
+
+
+    <string-array name="paises">
+        <item>English</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Spanish</item>
+        <item>Catalan</item>
+        <item>Galician</item>
+        <item>Italian</item>
+        <item>Dutch</item>
+        <item>Arabic</item>
+        <item>Czech</item>
+        <item>Portuguese</item>
+    </string-array>
+    <string name="traduccion_resultado">Text translation</string>
+    <string name="traduccion_esperando">Translating the detected text in the image. Wait a second please.
+        If it is the first time using a language, it is possible that the application takes some minutes to
+        download the necessary models for the translation</string>
+    <string name="boton_traducir">Translate text</string>
+    <string name="source_language">Translate from</string>
+    <string name="target_language">Translate to</string>
+    <string name="text_translation_error">There has been an error during text translation</string>
+    <string name="translation_models_error">There has been an error. It is possible you don\'t have the language models necessary for the translation.
+                                            Connect to an Internet Connection via WIFI to download them.</string>
 </resources>

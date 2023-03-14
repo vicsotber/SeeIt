@@ -17,7 +17,7 @@ import com.project.tfg.R
 import com.project.tfg.ui.funcionalidades.CamaraActivity
 
 abstract class BaseActivity : AppCompatActivity() {
-    private lateinit var textToSpeech: TextToSpeech
+    protected lateinit var textToSpeech: TextToSpeech
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
