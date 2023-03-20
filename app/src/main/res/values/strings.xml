@@ -32,7 +32,7 @@
     <string name="escena_resultado_descripcion">Descripción de la imagen: </string>
     <string name="escena_resultado_objetos">Objetos detectados en la imagen: </string>
     <string name="escena_resultado_etiquetas">Etiquetas detectadas para esta imagen: </string>
-    <string name="scene_description_error">Se ha producido un error al obtener la descripción de la imagen. Asegurate de tener conexión a internet.</string>
+    <string name="scene_description_error">Se ha producido un error al obtener la descripción de la imagen. Asegúrate de tener conexión a internet.</string>
 
     <string-array name="paises">
         <item>Inglés</item>
