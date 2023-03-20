@@ -3,19 +3,22 @@ package com.project.tfg.ui.funcionalidades
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.mlkit.vision.label.ImageLabeler
-import com.project.tfg.BuildConfig
 import com.project.tfg.R
 import com.project.tfg.ui.BaseActivity
+import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.File
 import java.util.*
+
 
 class EscenaActivity : BaseActivity() {
     private lateinit var labeler: ImageLabeler
@@ -48,7 +51,7 @@ class EscenaActivity : BaseActivity() {
     }
 
     override fun functionality(data: Uri) {
-        val thread = Thread {
+        /*val thread = Thread {
             try {
                 //Prepara el cliente con la imagen a enviar en bytes
                 val client = OkHttpClient()
@@ -82,6 +85,96 @@ class EscenaActivity : BaseActivity() {
                     .addHeader("Content-Type", "application/octet-stream")
                     .build()
                 val response = client.newCall(request).execute()
+
+                //Lee el JSON resultado y obtiene la descripción, objetos y etiquetas
+                val gson = Gson()
+                val jsonResponse = response.body?.string()
+                val jsonObject = gson.fromJson(jsonResponse, JsonObject::class.java)
+
+                val description = jsonObject.getAsJsonObject("descriptionResult")
+                    .getAsJsonArray("values").get(0).asJsonObject.get("text").asString
+                val tags = jsonObject.getAsJsonObject("tagsResult")
+                    .getAsJsonArray("values").toList()
+                val tagsNames: ArrayList<String> = ArrayList<String>()
+                for (i in tags.indices) {
+                    tagsNames.add(tags[i].asJsonObject.get("name").asString)
+                }
+                val objects = jsonObject.getAsJsonObject("objectsResult")
+                    .getAsJsonArray("values").toList()
+                val objectsNames: ArrayList<String> = ArrayList<String>()
+                for (i in objects.indices) {
+                    objectsNames.add(tags[i].asJsonObject.get("name").asString)
+                }
+
+                //Presenta el resultado en pantalla
+                runOnUiThread {
+                    val text: TextView = findViewById(R.id.texto_resultado)
+                    val descriptionMessage = getString(R.string.escena_resultado_descripcion)
+                    val objectsMessage = getString(R.string.escena_resultado_objetos)
+                    val tagsMessage = getString(R.string.escena_resultado_etiquetas)
+                    val result:String = if (objectsNames.size != 0) {
+                        "<b>$descriptionMessage</b> $description<br/><br/>" +
+                                "<b>$objectsMessage</b> $objectsNames<br/><br/>" +
+                                "<b>$tagsMessage</b> $tagsNames"
+
+                    }else {
+                        "<b>$descriptionMessage</b> $description<br/><br/>" +
+                                "<b>$tagsMessage</b> $tagsNames"
+                    }
+                    val formattedResult = HtmlCompat.fromHtml(result,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    text.text = formattedResult
+                    convertTextToSpeech(formattedResult.toString())
+                }
+
+            } catch (e: Exception) {
+                val text: TextView = findViewById(R.id.texto_resultado)
+                runOnUiThread {
+                    text.text = getString(R.string.scene_description_error)
+                }
+                convertTextToSpeech(getString(R.string.scene_description_error))
+            }
+        }
+
+        thread.start()*/
+
+        val thread = Thread {
+            try {
+                //Prepara el cliente con la imagen a enviar en bytes
+                val client = OkHttpClient()
+
+                //Obtiene el lenguaje del dispositivo para hacer la petición en el idioma adecuado
+                val currentLocale: Locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    resources.configuration.locales.get(0)
+                } else {
+                    resources.configuration.locale
+                }
+                val deviceLanguage: String = currentLocale.getLanguage()
+                val url: String = if (deviceLanguage == "es") {
+                    "https://see-it-proxy-api.vercel.app/analizar_imagen?language=es"
+                }else {
+                    "https://see-it-proxy-api.vercel.app/analizar_imagen?language=en"
+                }
+
+                val inputStream = contentResolver.openInputStream(data)
+                val bytes = inputStream?.readBytes()
+                val mediaType = "image/*".toMediaTypeOrNull()
+                val requestBody = bytes?.let {
+                    MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("imagen", "image.jpg", it.toRequestBody(mediaType))
+                        .build()
+                }
+                inputStream?.close()
+
+                //Configura la request y hace la petición
+                val request = Request.Builder()
+                    .url(url)
+                    .post(requestBody!!)
+                    .build()
+                val response = client.newCall(request).execute()
+
+                Log.d("PRUEBA", "$response")
 
                 //Lee el JSON resultado y obtiene la descripción, objetos y etiquetas
                 val gson = Gson()
