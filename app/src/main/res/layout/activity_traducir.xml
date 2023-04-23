@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/boton_traducir" />
 
         <TextView
-            android:id="@+id/traduccion_resultado"
+            android:id="@+id/texto_resultado"
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

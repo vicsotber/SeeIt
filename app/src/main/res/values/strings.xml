@@ -49,7 +49,7 @@
     </string-array>
     <string name="traduccion_resultado">Traducción del texto</string>
     <string name="traduccion_esperando">Realizando traducción del texto detectado en la imagen. Espere por favor.
-            Si es la primera vez que usa un idioma seleccionado es posible que tarde unos minutos en descargar el modelo de traducción.</string>
+            Si es la primera vez que usa un idioma seleccionado es posible que se necesiten unos minutos para descargar el modelo de traducción.</string>
     <string name="boton_traducir">Traducir texto</string>
     <string name="source_language">Traducir del</string>
     <string name="target_language">Traducir al</string>

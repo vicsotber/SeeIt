@@ -1,9 +1,12 @@
 package com.project.tfg.ui.funcionalidades
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
@@ -13,20 +16,32 @@ import com.project.tfg.R
 import com.project.tfg.ui.BaseActivity
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
-import java.io.File
 import java.util.*
 
 
 class EscenaActivity : BaseActivity() {
     private lateinit var labeler: ImageLabeler
     override fun onCreate(savedInstanceState: Bundle?) {
+        isSharingImage = intent?.action == Intent.ACTION_SEND
         super.onCreate(savedInstanceState)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = getString(R.string.nombre_funcionalidad_escenas)
+
+        val intent = intent
+        val action = intent.action
+        val type = intent.type
+        if (Intent.ACTION_SEND == action && type != null) {
+            if (type.startsWith("image/")) {
+                val imageUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri?
+                if (imageUri != null) {
+                    val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+                    imagenPlaceholder.setImageURI(imageUri)
+                    functionality(imageUri)
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

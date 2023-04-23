@@ -26,7 +26,13 @@
         <activity
             android:name=".ui.funcionalidades.TraducirActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false">
+            android:exported="true"
+            android:label="Traducir">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -34,7 +40,13 @@
         <activity
             android:name=".ui.funcionalidades.EscenaActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false">
+            android:exported="true"
+            android:label="Escena">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -50,7 +62,13 @@
         <activity
             android:name=".ui.funcionalidades.TextoActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false">
+            android:exported="true"
+            android:label="Texto">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -61,6 +79,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity android:name=".ui.BaseActivity" android:exported="false">
         </activity>
         <activity
             android:name="com.project.tfg.MainActivity"

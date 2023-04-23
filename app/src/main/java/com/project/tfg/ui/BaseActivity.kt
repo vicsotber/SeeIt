@@ -9,7 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -18,24 +18,27 @@ import com.project.tfg.ui.funcionalidades.CamaraActivity
 
 abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var textToSpeech: TextToSpeech
+    protected var isSharingImage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val dialogUtils = DialogUtils()
-        dialogUtils.showAlertDialog(this,
-            getString(R.string.texto_dialog_title),
-            getString(R.string.texto_dialog_cuerpo),
-            { _, _ ->
-                requestPermissionGallery()
-            },
-            { _, _ ->
-                requestPermissionCamera()
-            },
-            { _, _ ->
-                finish()
-            }
-        )
+        if (!isSharingImage) {
+            val dialogUtils = DialogUtils()
+            dialogUtils.showAlertDialog(this,
+                getString(R.string.texto_dialog_title),
+                getString(R.string.texto_dialog_cuerpo),
+                { _, _ ->
+                    requestPermissionGallery()
+                },
+                { _, _ ->
+                    requestPermissionCamera()
+                },
+                { _, _ ->
+                    finish()
+                }
+            )
+        }
 
         setContentView(R.layout.functionality_result)
     }
@@ -87,7 +90,9 @@ abstract class BaseActivity : AppCompatActivity() {
         if(isGranted) {
             pickPhotoFromGallery()
         }else {
-            Toast.makeText(this, R.string.permisos_no_concedidos, Toast.LENGTH_LONG).show()
+            val text: TextView = findViewById(R.id.texto_resultado)
+            text.text = getString(R.string.permisos_no_concedidos)
+            convertTextToSpeech(getString(R.string.permisos_no_concedidos))
         }
     }
 
@@ -114,7 +119,9 @@ abstract class BaseActivity : AppCompatActivity() {
         if(isGranted) {
             takePhotoWithCamera()
         }else {
-            Toast.makeText(this, R.string.permisos_no_concedidos, Toast.LENGTH_LONG).show()
+            val text: TextView = findViewById(R.id.texto_resultado)
+            text.text = getString(R.string.permisos_no_concedidos)
+            convertTextToSpeech(getString(R.string.permisos_no_concedidos))
         }
     }
 
@@ -134,9 +141,9 @@ abstract class BaseActivity : AppCompatActivity() {
     ){ result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data?.data
-            val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
-            imagenPlaceholder.setImageURI(data)
             if (data != null) {
+                val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+                imagenPlaceholder.setImageURI(data)
                 functionality(data)
             }
         }
