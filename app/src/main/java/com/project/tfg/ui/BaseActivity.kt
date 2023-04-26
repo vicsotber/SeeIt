@@ -158,7 +158,6 @@ abstract class BaseActivity : AppCompatActivity() {
                 textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
             } else {
                 // Hubo un error al inicializar el TextToSpeech
-                // Maneja el error
             }
         })
     }

@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.mlkit.vision.label.ImageLabeler
@@ -230,6 +232,8 @@ class EscenaActivity : BaseActivity() {
                         HtmlCompat.FROM_HTML_MODE_LEGACY)
                     text.text = formattedResult
                     convertTextToSpeech(formattedResult.toString())
+
+                    guardarRegistro(data, result)
                 }
 
             } catch (e: Exception) {
@@ -285,5 +289,20 @@ class EscenaActivity : BaseActivity() {
                  // Task failed with an exception
                  // ...
              }*/
+    }
+
+    private fun guardarRegistro(uri: Uri, result: String) {
+        val userUid = FirebaseAuth.getInstance().currentUser?.uid
+        if (userUid != null) {
+            val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+            val ref = database.getReference("$userUid/escena")
+            val data = HashMap<String, String>()
+            data["image_url"] = uri.toString()
+            data["text_result"] = result
+            Log.d("DB", database.toString())
+            Log.d("DB", uri.toString())
+            val newRef = ref.push()
+            newRef.setValue(data)
+        }
     }
 }

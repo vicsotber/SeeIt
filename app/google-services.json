@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "272218008971",
+    "project_id": "seeit-4fe0d",
+    "storage_bucket": "seeit-4fe0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272218008971:android:9c65b8a561764af7a8d38e",
+        "android_client_info": {
+          "package_name": "com.project.tfg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272218008971-h44n74gs985ih8huufusjiogpfmjprkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6tjp-E0WU-uqzwodh-RiqdxGjtRpom3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272218008971-h44n74gs985ih8huufusjiogpfmjprkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

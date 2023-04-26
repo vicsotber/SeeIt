@@ -16,8 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG"
         tools:targetApi="31">
-        <activity
+        <!--<activity
             android:name=".ui.funcionalidades.PerrosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>-->
+        <activity
+            android:name="com.project.tfg.ui.registros.EmailPasswordActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

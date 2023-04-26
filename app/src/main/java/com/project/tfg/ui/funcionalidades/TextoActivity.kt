@@ -4,9 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -72,6 +76,7 @@ class TextoActivity : BaseActivity() {
                 text.setText(visionText.text)
 
                 convertTextToSpeech(visionText.text)
+                guardarRegistro(data, visionText)
 
             }
             .addOnFailureListener { _ ->
@@ -79,6 +84,21 @@ class TextoActivity : BaseActivity() {
                 text.text = getString(R.string.text_recognition_error)
                 convertTextToSpeech(getString(R.string.text_recognition_error))
             }
+    }
+
+    private fun guardarRegistro(uri: Uri, visionText: Text) {
+        val userUid = FirebaseAuth.getInstance().currentUser?.uid
+        if (userUid != null) {
+            val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+            val ref = database.getReference("$userUid/texto")
+            val data = HashMap<String, String>()
+            data["image_url"] = uri.toString()
+            data["text_result"] = visionText.text
+            Log.d("DB", database.toString())
+            Log.d("DB", uri.toString())
+            val newRef = ref.push()
+            newRef.setValue(data)
+        }
     }
 
 }

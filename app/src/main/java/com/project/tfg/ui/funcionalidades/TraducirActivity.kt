@@ -5,16 +5,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -123,6 +127,8 @@ class TraducirActivity : BaseActivity() {
                                 val targetLocale = Locale(getLanguageCode(targetLanguage))
                                 textToSpeech.setLanguage(targetLocale)
                                 textToSpeech.speak(translatedText, TextToSpeech.QUEUE_FLUSH, null, null)
+
+                                guardarRegistro(data, visionText, translatedText)
                             }
                             .addOnFailureListener { exception ->
                                 traduccionResultado.text = getString(R.string.text_translation_error)
@@ -156,6 +162,22 @@ class TraducirActivity : BaseActivity() {
             "Portugués", "Portuguese" -> TranslateLanguage.PORTUGUESE
 
             else -> TranslateLanguage.ENGLISH // Por defecto, utiliza inglés
+        }
+    }
+
+    private fun guardarRegistro(uri: Uri, visionText: Text, translatedText: String) {
+        val userUid = FirebaseAuth.getInstance().currentUser?.uid
+        if (userUid != null) {
+            val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+            val ref = database.getReference("$userUid/traducir")
+            val data = HashMap<String, String>()
+            data["image_url"] = uri.toString()
+            data["text_recognized"] = visionText.text
+            data["text_translated"] = translatedText
+            Log.d("DB", database.toString())
+            Log.d("DB", uri.toString())
+            val newRef = ref.push()
+            newRef.setValue(data)
         }
     }
 
