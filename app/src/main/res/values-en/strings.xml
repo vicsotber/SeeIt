@@ -50,6 +50,8 @@
         <item>Portuguese</item>
     </string-array>
     <string name="traduccion_resultado">Text translation</string>
+    <string name="texto_reconocido">Recognized text</string>
+    <string name="texto_traducido">Translated text</string>
     <string name="traduccion_esperando">Translating the detected text in the image. Wait a second please.
         If it is the first time using a language, it is possible that the application takes some minutes to
         download the necessary models for the translation</string>
@@ -59,4 +61,29 @@
     <string name="text_translation_error">There has been an error during text translation</string>
     <string name="translation_models_error">There has been an error. It is possible you don\'t have the language models necessary for the translation.
                                             Connect to an Internet Connection via WIFI to download them.</string>
+
+    <string name="logo_seeit">SeeIt logo</string>
+    <string name="access_advice">Login to check your previously performed image analysis</string>
+    <string name="access_btn">Access</string>
+    <string name="login_register_advice">Introduce your email and password and choose if you rather login (if you already have an account) or register if you don\'t </string>
+    <string name="email_input_hint">Email</string>
+    <string name="password_input_hint">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="register_btn">Register</string>
+    <string name="email_empty">Introduce an email address</string>
+    <string name="email_not_valid">Introduce a valid email address</string>
+    <string name="password_empty">Introduce a password</string>
+    <string name="password_too_short">The password must be at least 6 characters long</string>
+    <string name="login_correct">Login successful</string>
+    <string name="login_error">There has been an error during the login</string>
+    <string name="register_correct">Register successful</string>
+    <string name="register_error">There has been an error during the registration</string>
+    <string name="error_advice">You must introduce a valid email and password. The password must be at least 6 characters long</string>
+    <string name="email_in_use">The email introduced is already being used</string>
+    <string name="password_incorrect">The password is incorrect</string>
+    <string name="email_not_exists">There isn\'t any user with this email address</string>
+    <string name="logout_title">Logout</string>
+    <string name="logout_correct">Sesión cerrada correctamente</string>
+    <string name="delete_title">Delete account</string>
+    <string name="delete_correct">The account and all its data have been deleted correctly</string>
 </resources>

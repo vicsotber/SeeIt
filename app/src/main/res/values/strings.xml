@@ -48,6 +48,8 @@
         <item>Portugués</item>
     </string-array>
     <string name="traduccion_resultado">Traducción del texto</string>
+    <string name="texto_reconocido">Texto reconocido</string>
+    <string name="texto_traducido">Texto traducido</string>
     <string name="traduccion_esperando">Realizando traducción del texto detectado en la imagen. Espere por favor.
             Si es la primera vez que usa un idioma seleccionado es posible que se necesiten unos minutos para descargar el modelo de traducción.</string>
     <string name="boton_traducir">Traducir texto</string>
@@ -55,4 +57,29 @@
     <string name="target_language">Traducir al</string>
     <string name="text_translation_error">Ha ocurrido un error durante la traducción del texto</string>
     <string name="translation_models_error">Se ha producido un error. Es posible que no se tengan los modelos de traducción necesarios. Asegurate de estar conectado a internet via WIFI para descargarlos.</string>
+
+    <string name="logo_seeit">Logo SeeIt</string>
+    <string name="access_advice">Inicia sesión para ver los registros de anteriores análisis</string>
+    <string name="access_btn">Acceder</string>
+    <string name="login_register_advice">Introduce su correo y contraseña y selecciona si desea iniciar sesión (si ya posee una cuenta), o registrarse si aún no tiene</string>
+    <string name="email_input_hint">Email</string>
+    <string name="password_input_hint">Contraseña</string>
+    <string name="login_btn">Iniciar sesión</string>
+    <string name="register_btn">Registrarse</string>
+    <string name="email_empty">Introduce una dirección de correo</string>
+    <string name="email_not_valid">Introduce una dirección de correo válida</string>
+    <string name="password_empty">Introduce una contraseña</string>
+    <string name="password_too_short">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="login_correct">Inicio de sesión correcto</string>
+    <string name="login_error">Ha ocurrido un error durante el inicio de sesión</string>
+    <string name="register_correct">Registro correcto</string>
+    <string name="register_error">Ha ocurrido un error durante el registro</string>
+    <string name="error_advice">Es obligatorio introducir un correo y una contraseña válidos. La contraseña debe tener al menos 6 caracteres.</string>
+    <string name="email_in_use">El correo introducido ya está en uso</string>
+    <string name="password_incorrect">La contraseña no es correcta</string>
+    <string name="email_not_exists">No existe un usuario con esta dirección de correo</string>
+    <string name="logout_title">Cerrar sesión</string>
+    <string name="logout_correct">Sesión cerrada correctamente</string>
+    <string name="delete_title">Borrar cuenta</string>
+    <string name="delete_correct">La cuenta y todos sus datos se ha borrado satisfactoriamente</string>
 </resources>

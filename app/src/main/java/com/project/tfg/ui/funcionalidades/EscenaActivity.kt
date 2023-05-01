@@ -5,10 +5,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.mlkit.vision.label.ImageLabeler
@@ -24,6 +28,9 @@ class EscenaActivity : BaseActivity() {
     private lateinit var labeler: ImageLabeler
     override fun onCreate(savedInstanceState: Bundle?) {
         isSharingImage = intent?.action == Intent.ACTION_SEND
+        if(intent.getStringExtra("IMAGE_URL") != null) {
+            isSharingImage = true
+        }
         super.onCreate(savedInstanceState)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -41,6 +48,10 @@ class EscenaActivity : BaseActivity() {
                     functionality(imageUri)
                 }
             }
+        }else if(intent.getStringExtra("IMAGE_URL") != null) {
+            val imageUrl = intent.getStringExtra("IMAGE_URL")
+            val textResult = intent.getStringExtra("TEXT_RESULT")
+            cargarRegistro(imageUrl, textResult)
         }
     }
 
@@ -189,8 +200,6 @@ class EscenaActivity : BaseActivity() {
                     .build()
                 val response = client.newCall(request).execute()
 
-                Log.d("PRUEBA", "$response")
-
                 //Lee el JSON resultado y obtiene la descripción, objetos y etiquetas
                 val gson = Gson()
                 val jsonResponse = response.body?.string()
@@ -227,9 +236,11 @@ class EscenaActivity : BaseActivity() {
                                 "<b>$tagsMessage</b> $tagsNames"
                     }
                     val formattedResult = HtmlCompat.fromHtml(result,
-                        HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        HtmlCompat.FROM_HTML_MODE_COMPACT)
                     text.text = formattedResult
                     convertTextToSpeech(formattedResult.toString())
+
+                    guardarRegistro(data, result)
                 }
 
             } catch (e: Exception) {
@@ -285,5 +296,46 @@ class EscenaActivity : BaseActivity() {
                  // Task failed with an exception
                  // ...
              }*/
+    }
+
+    private fun guardarRegistro(uri: Uri, result: String) {
+        val userUid = FirebaseAuth.getInstance().currentUser?.uid
+        if (userUid != null) {
+            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
+            val uploadTask = storageRef.putFile(uri)
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+                // La imagen se ha subido exitosamente a Firebase Storage
+                val downloadUrlTask = taskSnapshot.storage.downloadUrl
+                downloadUrlTask.addOnSuccessListener { uri ->
+                    // Obtiene la URL de descarga de la imagen
+                    val imageUrl = uri.toString()
+
+                    // Guarda la URL de la imagen en Firebase Realtime Database
+                    val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+                    val ref = database.getReference("$userUid/escena")
+                    val data = HashMap<String, String>()
+                    data["image_url"] = imageUrl
+                    data["text_result"] = result
+                    val newRef = ref.push()
+                    newRef.setValue(data)
+                }
+                    .addOnFailureListener { exception ->
+                        // Ocurrió un error al obtener la URL de descarga de la imagen
+                    }
+            }
+                .addOnFailureListener { exception ->
+                    // Ocurrió un error al subir la imagen a Firebase Storage
+                }
+
+        }
+    }
+
+    private fun cargarRegistro(imageUrl: String?, textResult: String?) {
+        val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+        Glide.with(this).load(imageUrl).into(imagenPlaceholder)
+        val text: TextView = findViewById(R.id.texto_resultado)
+        val formattedResult = HtmlCompat.fromHtml(textResult!!, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        text.text = formattedResult
+        convertTextToSpeech(formattedResult.toString())
     }
 }
