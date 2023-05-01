@@ -50,6 +50,8 @@
         <item>Portuguese</item>
     </string-array>
     <string name="traduccion_resultado">Text translation</string>
+    <string name="texto_reconocido">Recognized text</string>
+    <string name="texto_traducido">Translated text</string>
     <string name="traduccion_esperando">Translating the detected text in the image. Wait a second please.
         If it is the first time using a language, it is possible that the application takes some minutes to
         download the necessary models for the translation</string>

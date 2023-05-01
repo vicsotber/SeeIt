@@ -4,11 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -22,6 +24,9 @@ class TextoActivity : BaseActivity() {
     private lateinit var recognizer: TextRecognizer
     override fun onCreate(savedInstanceState: Bundle?) {
         isSharingImage = intent?.action == Intent.ACTION_SEND
+        if(intent.getStringExtra("IMAGE_URL") != null) {
+            isSharingImage = true
+        }
         super.onCreate(savedInstanceState)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -39,6 +44,10 @@ class TextoActivity : BaseActivity() {
                     functionality(imageUri)
                 }
             }
+        }else if(intent.getStringExtra("IMAGE_URL") != null) {
+            val imageUrl = intent.getStringExtra("IMAGE_URL")
+            val textResult = intent.getStringExtra("TEXT_RESULT")
+            cargarRegistro(imageUrl, textResult)
         }
     }
 
@@ -79,7 +88,7 @@ class TextoActivity : BaseActivity() {
                 guardarRegistro(data, visionText)
 
             }
-            .addOnFailureListener { _ ->
+            .addOnFailureListener {
                 val text: TextView = findViewById(R.id.texto_resultado)
                 text.text = getString(R.string.text_recognition_error)
                 convertTextToSpeech(getString(R.string.text_recognition_error))
@@ -89,15 +98,43 @@ class TextoActivity : BaseActivity() {
     private fun guardarRegistro(uri: Uri, visionText: Text) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
-            val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
-            val ref = database.getReference("$userUid/texto")
-            val data = HashMap<String, String>()
-            data["image_url"] = uri.toString()
-            data["text_result"] = visionText.text
-            Log.d("DB", database.toString())
-            Log.d("DB", uri.toString())
-            val newRef = ref.push()
-            newRef.setValue(data)
+            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
+            val uploadTask = storageRef.putFile(uri)
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+                // La imagen se ha subido exitosamente a Firebase Storage
+                val downloadUrlTask = taskSnapshot.storage.downloadUrl
+                downloadUrlTask.addOnSuccessListener { uri ->
+                    // Obtiene la URL de descarga de la imagen
+                    val imageUrl = uri.toString()
+
+                    // Guarda la URL de la imagen en Firebase Realtime Database
+                    val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+                    val ref = database.getReference("$userUid/texto")
+                    val data = HashMap<String, String>()
+                    data["image_url"] = imageUrl
+                    data["text_result"] = visionText.text
+                    val newRef = ref.push()
+                    newRef.setValue(data)
+                }
+                    .addOnFailureListener { exception ->
+                        // Ocurrió un error al obtener la URL de descarga de la imagen
+                    }
+            }
+                .addOnFailureListener { exception ->
+                    // Ocurrió un error al subir la imagen a Firebase Storage
+                }
+
+        }
+    }
+
+    private fun cargarRegistro(imageUrl: String?, textResult: String?) {
+        val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+        Glide.with(this).load(imageUrl).into(imagenPlaceholder)
+        val text: TextView = findViewById(R.id.texto_resultado)
+        text.setText(textResult)
+
+        if (textResult != null) {
+            convertTextToSpeech(textResult)
         }
     }
 

@@ -5,13 +5,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.tts.TextToSpeech
-import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -26,12 +30,16 @@ import com.project.tfg.R
 import com.project.tfg.ui.BaseActivity
 import java.util.*
 
+
 class TraducirActivity : BaseActivity() {
     private lateinit var recognizer: TextRecognizer
     private lateinit var translator: Translator
     private lateinit var traduccionResultado: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         isSharingImage = intent?.action == Intent.ACTION_SEND
+        if(intent.getStringExtra("IMAGE_URL") != null) {
+            isSharingImage = true
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_traducir)
 
@@ -52,6 +60,11 @@ class TraducirActivity : BaseActivity() {
                     functionality(imageUri)
                 }
             }
+        }else if(intent.getStringExtra("IMAGE_URL") != null) {
+            val imageUrl = intent.getStringExtra("IMAGE_URL")
+            val textRecognized = intent.getStringExtra("TEXT_RECOGNIZED")
+            val textTranslated = intent.getStringExtra("TEXT_TRANSLATED")
+            cargarRegistro(imageUrl, textRecognized, textTranslated)
         }
     }
 
@@ -168,17 +181,57 @@ class TraducirActivity : BaseActivity() {
     private fun guardarRegistro(uri: Uri, visionText: Text, translatedText: String) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
-            val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
-            val ref = database.getReference("$userUid/traducir")
-            val data = HashMap<String, String>()
-            data["image_url"] = uri.toString()
-            data["text_recognized"] = visionText.text
-            data["text_translated"] = translatedText
-            Log.d("DB", database.toString())
-            Log.d("DB", uri.toString())
-            val newRef = ref.push()
-            newRef.setValue(data)
+            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
+            val uploadTask = storageRef.putFile(uri)
+            uploadTask.addOnSuccessListener { taskSnapshot ->
+                // La imagen se ha subido exitosamente a Firebase Storage
+                val downloadUrlTask = taskSnapshot.storage.downloadUrl
+                downloadUrlTask.addOnSuccessListener { uri ->
+                    // Obtiene la URL de descarga de la imagen
+                    val imageUrl = uri.toString()
+
+                    // Guarda la URL de la imagen en Firebase Realtime Database
+                    val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+                    val ref = database.getReference("$userUid/traducir")
+                    val data = HashMap<String, String>()
+                    data["image_url"] = imageUrl
+                    data["text_recognized"] = visionText.text
+                    data["text_translated"] = translatedText
+                    val newRef = ref.push()
+                    newRef.setValue(data)
+                }
+                    .addOnFailureListener { exception ->
+                        // Ocurrió un error al obtener la URL de descarga de la imagen
+                    }
+            }
+                .addOnFailureListener { exception ->
+                    // Ocurrió un error al subir la imagen a Firebase Storage
+                }
+
         }
+    }
+
+    private fun cargarRegistro(imageUrl: String?, textRecognized: String?, textTranslated: String?) {
+        val spinnerTargetLanguage = findViewById<Spinner>(R.id.spinner_target_language)
+        val spinnerSourceLanguage = findViewById<Spinner>(R.id.spinner_source_language)
+        val buttonTraducir = findViewById<Button>(R.id.boton_traducir)
+        val sourceLanguageText = findViewById<TextView>(R.id.source_language)
+        val targetLanguageText = findViewById<TextView>(R.id.target_language)
+        Arrays.asList(spinnerTargetLanguage, spinnerSourceLanguage, sourceLanguageText, targetLanguageText, buttonTraducir)
+            .forEach { view ->
+                view.visibility = View.GONE
+            }
+        val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+        Glide.with(this).load(imageUrl).into(imagenPlaceholder)
+        val text: TextView = findViewById(R.id.texto_resultado)
+
+        val recognizedTextMessage = getString(R.string.texto_reconocido)
+        val translatedTextMessage = getString(R.string.texto_traducido)
+        val result:String = "<b>$recognizedTextMessage: </b> $textRecognized<br/><br/>" +
+                    "<b>$translatedTextMessage: </b> $textTranslated<br/><br/>"
+        val formattedResult = HtmlCompat.fromHtml(result, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        text.text = formattedResult
+        convertTextToSpeech(formattedResult.toString())
     }
 
 }
