@@ -152,7 +152,7 @@ class RegistrosFragment : Fragment() {
             }
     }
 
-    private fun cargarRegistros() {
+/*    private fun cargarRegistros() {
         val gridView = view?.findViewById<GridLayout>(R.id.image_grid)
         gridView?.removeAllViews()
         val user = auth.currentUser
@@ -245,6 +245,75 @@ class RegistrosFragment : Fragment() {
                     startActivity(intent)
                 }
 
+            }
+        }.addOnFailureListener{ exception ->
+            Log.e("firebase", "Error getting data", exception)
+        }
+    }*/
+
+    private fun cargarRegistros() {
+        val gridView = view?.findViewById<GridLayout>(R.id.image_grid)
+        gridView?.removeAllViews()
+        val user = auth.currentUser
+        val userUid = user?.uid
+
+        val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
+        var ref = database.getReference("$userUid/texto")
+        descargarRegistros(ref, "Texto")
+
+        ref = database.getReference("$userUid/escena")
+        descargarRegistros(ref, "Escena")
+
+        ref = database.getReference("$userUid/traducir")
+        descargarRegistros(ref, "Traducir")
+    }
+
+    private fun descargarRegistros(ref: DatabaseReference, tipo: String) {
+        val gridView = view?.findViewById<GridLayout>(R.id.image_grid)
+
+        // Listener a la referencia para obtener los datos de cada registro
+        ref.get().addOnSuccessListener { snapshot ->
+            // Iterar a través de todos los registros y agregar vistas de imagen al contenedor
+            for (registroSnapshot in snapshot.children) {
+                // Obtener la URL de la imagen del registro actual
+                val imageUrl = registroSnapshot.child("image_url").value.toString()
+                val imageView = ImageView(requireContext())
+                val params = GridLayout.LayoutParams(
+                    GridLayout.spec(GridLayout.UNDEFINED, 1f),
+                    GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                )
+                params.setMargins(8, 8, 8, 8)
+                imageView.layoutParams = params
+                Glide.with(requireContext()).load(imageUrl).into(imageView)
+                gridView?.addView(imageView)
+
+                when (tipo) {
+                    "Escena" -> {
+                        imageView.setOnClickListener {
+                            val intent = Intent(requireContext(), EscenaActivity::class.java)
+                            intent.putExtra("IMAGE_URL", imageUrl)
+                            intent.putExtra("TEXT_RESULT", registroSnapshot.child("text_result").value.toString())
+                            startActivity(intent)
+                        }
+                    }
+                    "Texto" -> {
+                        imageView.setOnClickListener {
+                            val intent = Intent(requireContext(), TextoActivity::class.java)
+                            intent.putExtra("IMAGE_URL", imageUrl)
+                            intent.putExtra("TEXT_RESULT", registroSnapshot.child("text_result").value.toString())
+                            startActivity(intent)
+                        }
+                    }
+                    else -> {
+                        imageView.setOnClickListener {
+                            val intent = Intent(requireContext(), TraducirActivity::class.java)
+                            intent.putExtra("IMAGE_URL", imageUrl)
+                            intent.putExtra("TEXT_RECOGNIZED", registroSnapshot.child("text_recognized").value.toString())
+                            intent.putExtra("TEXT_TRANSLATED", registroSnapshot.child("text_translated").value.toString())
+                            startActivity(intent)
+                        }
+                    }
+                }
             }
         }.addOnFailureListener{ exception ->
             Log.e("firebase", "Error getting data", exception)

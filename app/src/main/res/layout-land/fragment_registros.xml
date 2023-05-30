@@ -13,7 +13,7 @@
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
-        android:text="Inicia sesión para ver los registros de anteriores análisis"
+        android:text="@string/access_advice"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
