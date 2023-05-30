@@ -64,7 +64,7 @@ class TraducirActivity : BaseActivity() {
             val imageUrl = intent.getStringExtra("IMAGE_URL")
             val textRecognized = intent.getStringExtra("TEXT_RECOGNIZED")
             val textTranslated = intent.getStringExtra("TEXT_TRANSLATED")
-            cargarRegistro(imageUrl, textRecognized, textTranslated)
+            loadRecord(imageUrl, textRecognized, textTranslated)
         }
     }
 
@@ -108,7 +108,7 @@ class TraducirActivity : BaseActivity() {
         }
     }
 
-    private fun translateText(data: Uri) {
+    /*private fun translateText(data: Uri) {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
 
         val spinnerSource = findViewById<Spinner>(R.id.spinner_source_language)
@@ -158,6 +158,50 @@ class TraducirActivity : BaseActivity() {
                 traduccionResultado.text = getString(R.string.text_recognition_error)
                 convertTextToSpeech(getString(R.string.text_recognition_error))
             }
+    }*/
+
+    private fun translateText(data: Uri) {
+        val imagen: InputImage = InputImage.fromFilePath(this, data)
+
+        //Realiza el reconocimiento de texto
+        recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        recognizer.process(imagen)
+            .addOnSuccessListener { visionText ->
+                downloadTranslationModelsIfNeeded(data, visionText)
+            }
+            .addOnFailureListener {
+                traduccionResultado.text = getString(R.string.text_recognition_error)
+                convertTextToSpeech(getString(R.string.text_recognition_error))
+            }
+    }
+
+
+    private fun downloadTranslationModelsIfNeeded(data:Uri, visionText: Text) {
+        val spinnerSource = findViewById<Spinner>(R.id.spinner_source_language)
+        val sourceLanguage = spinnerSource.selectedItem as String
+
+        val spinnerTarget = findViewById<Spinner>(R.id.spinner_target_language)
+        val targetLanguage = spinnerTarget.selectedItem as String
+
+        val options = TranslatorOptions.Builder()
+            .setSourceLanguage(getLanguageCode(sourceLanguage))
+            .setTargetLanguage(getLanguageCode(targetLanguage))
+            .build()
+        translator = Translation.getClient(options)
+
+        //Descarga los modelos de traducción si es necesario a través de wifi
+        val conditions = DownloadConditions.Builder()
+            .requireWifi()
+            .build()
+        translator.downloadModelIfNeeded(conditions)
+            .addOnSuccessListener {
+                //Realiza la traducción del texto
+                translateText(data, visionText)
+            }
+            .addOnFailureListener { exception ->
+                traduccionResultado.text = getString(R.string.text_translation_error)
+                convertTextToSpeech(getString(R.string.text_translation_error))
+            }
     }
 
     private fun getLanguageCode(language: String): String {
@@ -178,7 +222,26 @@ class TraducirActivity : BaseActivity() {
         }
     }
 
-    private fun guardarRegistro(uri: Uri, visionText: Text, translatedText: String) {
+    private fun translateText(data:Uri, visionText: Text) {
+        val spinnerTarget = findViewById<Spinner>(R.id.spinner_target_language)
+        val targetLanguage = spinnerTarget.selectedItem as String
+
+        translator.translate(visionText.text)
+            .addOnSuccessListener { translatedText ->
+                traduccionResultado.setText(translatedText)
+                val targetLocale = Locale(getLanguageCode(targetLanguage))
+                textToSpeech.setLanguage(targetLocale)
+                textToSpeech.speak(translatedText, TextToSpeech.QUEUE_FLUSH, null, null)
+
+                saveRecord(data, visionText, translatedText)
+            }
+            .addOnFailureListener { exception ->
+                traduccionResultado.text = getString(R.string.text_translation_error)
+                convertTextToSpeech(getString(R.string.text_translation_error))
+            }
+    }
+
+    private fun saveRecord(uri: Uri, visionText: Text, translatedText: String) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
             val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
@@ -211,16 +274,19 @@ class TraducirActivity : BaseActivity() {
         }
     }
 
-    private fun cargarRegistro(imageUrl: String?, textRecognized: String?, textTranslated: String?) {
+    private fun loadRecord(imageUrl: String?, textRecognized: String?, textTranslated: String?) {
+        //Primero quita todos los elementos en pantalla que no son necesarios
         val spinnerTargetLanguage = findViewById<Spinner>(R.id.spinner_target_language)
         val spinnerSourceLanguage = findViewById<Spinner>(R.id.spinner_source_language)
         val buttonTraducir = findViewById<Button>(R.id.boton_traducir)
         val sourceLanguageText = findViewById<TextView>(R.id.source_language)
         val targetLanguageText = findViewById<TextView>(R.id.target_language)
-        Arrays.asList(spinnerTargetLanguage, spinnerSourceLanguage, sourceLanguageText, targetLanguageText, buttonTraducir)
+        listOf(spinnerTargetLanguage, spinnerSourceLanguage, sourceLanguageText, targetLanguageText, buttonTraducir)
             .forEach { view ->
                 view.visibility = View.GONE
             }
+
+        //Posteriormente muestra la imagen, el texto reconocido en la imagen, y el texto traducido
         val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
         Glide.with(this).load(imageUrl).into(imagenPlaceholder)
         val text: TextView = findViewById(R.id.texto_resultado)

@@ -47,7 +47,7 @@ class TextoActivity : BaseActivity() {
         }else if(intent.getStringExtra("IMAGE_URL") != null) {
             val imageUrl = intent.getStringExtra("IMAGE_URL")
             val textResult = intent.getStringExtra("TEXT_RESULT")
-            cargarRegistro(imageUrl, textResult)
+            loadRecord(imageUrl, textResult)
         }
     }
 
@@ -85,7 +85,7 @@ class TextoActivity : BaseActivity() {
                 text.setText(visionText.text)
 
                 convertTextToSpeech(visionText.text)
-                guardarRegistro(data, visionText)
+                saveRecord(data, visionText)
 
             }
             .addOnFailureListener {
@@ -95,7 +95,7 @@ class TextoActivity : BaseActivity() {
             }
     }
 
-    private fun guardarRegistro(uri: Uri, visionText: Text) {
+    private fun saveRecord(uri: Uri, visionText: Text) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
             val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
@@ -127,7 +127,7 @@ class TextoActivity : BaseActivity() {
         }
     }
 
-    private fun cargarRegistro(imageUrl: String?, textResult: String?) {
+    private fun loadRecord(imageUrl: String?, textResult: String?) {
         val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
         Glide.with(this).load(imageUrl).into(imagenPlaceholder)
         val text: TextView = findViewById(R.id.texto_resultado)

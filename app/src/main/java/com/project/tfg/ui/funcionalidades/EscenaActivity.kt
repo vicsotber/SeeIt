@@ -51,7 +51,7 @@ class EscenaActivity : BaseActivity() {
         }else if(intent.getStringExtra("IMAGE_URL") != null) {
             val imageUrl = intent.getStringExtra("IMAGE_URL")
             val textResult = intent.getStringExtra("TEXT_RESULT")
-            cargarRegistro(imageUrl, textResult)
+            loadRecord(imageUrl, textResult)
         }
     }
 
@@ -77,6 +77,49 @@ class EscenaActivity : BaseActivity() {
     }
 
     override fun functionality(data: Uri) {
+        //Versión prototipo que obtiene las etiquetas de la imagen usando MLKit y una descripción mediante OpenAI
+//        val imagen: InputImage = InputImage.fromFilePath(this, data)
+         /*labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+
+         labeler.process(imagen)
+             .addOnSuccessListener { labels ->
+                 val text: TextView = findViewById(R.id.texto_resultado)
+                 val labelsName: MutableList<String> = mutableListOf()
+                 for (label in labels) {
+                     labelsName.add(label.text)
+                 }
+
+                 text.setText(labelsName.toString())
+
+                 convertTextToSpeech(labelsName.toString())
+
+                 val thread = Thread {
+                     try {
+                         val service = OpenAiService(OpenAI API KEY)
+                         val completionRequest = CompletionRequest.builder()
+                             .prompt("Describe la imagen usando las siguientes etiquetas: " + labelsName.toString())
+                             .model("text-davinci-003")
+                             .maxTokens(4000)
+                             .build()
+                         val descripcion = service.createCompletion(completionRequest).choices.get(0).text
+                         runOnUiThread {
+                             text.setText(descripcion)
+                         }
+
+                     } catch (e: Exception) {
+                         e.printStackTrace()
+                     }
+                 }
+
+                 thread.start()
+             }
+             .addOnFailureListener { _ ->
+                 // Task failed with an exception
+                 // ...
+             }*/
+
+
+        //VERSION 2.0: HACE USO DE MICROSOFT AZURE COGNITIVE SERVICES
         /*val thread = Thread {
             try {
                 //Prepara el cliente con la imagen a enviar en bytes
@@ -164,7 +207,7 @@ class EscenaActivity : BaseActivity() {
 
         thread.start()*/
 
-        val thread = Thread {
+        /*val thread = Thread {
             try {
                 //Prepara el cliente con la imagen a enviar en bytes
                 val client = OkHttpClient()
@@ -252,53 +295,116 @@ class EscenaActivity : BaseActivity() {
             }
         }
 
+        thread.start()*/
+         */
+
+        val thread = Thread {
+            try {
+                //Obtener descripción de Microsoft Azure Cognititve Services
+                obtainDescription(data)
+
+            } catch (e: Exception) {
+                val text: TextView = findViewById(R.id.texto_resultado)
+                runOnUiThread {
+                    text.text = getString(R.string.scene_description_error)
+                }
+                convertTextToSpeech(getString(R.string.scene_description_error))
+            }
+        }
+
         thread.start()
-
-
-        //Versión prototipo que obtiene las etiquetas de la imagen usando MLKit y una descripción mediante OpenAI
-
-//        val imagen: InputImage = InputImage.fromFilePath(this, data)
-         /*labeler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
-
-         labeler.process(imagen)
-             .addOnSuccessListener { labels ->
-                 val text: TextView = findViewById(R.id.texto_resultado)
-                 val labelsName: MutableList<String> = mutableListOf()
-                 for (label in labels) {
-                     labelsName.add(label.text)
-                 }
-
-                 text.setText(labelsName.toString())
-
-                 convertTextToSpeech(labelsName.toString())
-
-                 val thread = Thread {
-                     try {
-                         val service = OpenAiService(OpenAI API KEY)
-                         val completionRequest = CompletionRequest.builder()
-                             .prompt("Describe la imagen usando las siguientes etiquetas: " + labelsName.toString())
-                             .model("text-davinci-003")
-                             .maxTokens(4000)
-                             .build()
-                         val descripcion = service.createCompletion(completionRequest).choices.get(0).text
-                         runOnUiThread {
-                             text.setText(descripcion)
-                         }
-
-                     } catch (e: Exception) {
-                         e.printStackTrace()
-                     }
-                 }
-
-                 thread.start()
-             }
-             .addOnFailureListener { _ ->
-                 // Task failed with an exception
-                 // ...
-             }*/
     }
 
-    private fun guardarRegistro(uri: Uri, result: String) {
+    private fun obtainDescription(data: Uri) {
+        //Prepara el cliente con la imagen a enviar en bytes
+        val client = OkHttpClient()
+
+        //Obtiene el lenguaje del dispositivo para hacer la petición en el idioma adecuado
+        val currentLocale: Locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            resources.configuration.locales.get(0)
+        } else {
+            resources.configuration.locale
+        }
+
+        //Elige la URL de la que obtendrá los datos según el idioma del dispositivo
+        val deviceLanguage: String = currentLocale.getLanguage()
+        val url: String = if (deviceLanguage == "es") {
+            "https://see-it-proxy-api.vercel.app/analizar_imagen?language=es"
+        }else {
+            "https://see-it-proxy-api.vercel.app/analizar_imagen?language=en"
+        }
+
+        val inputStream = contentResolver.openInputStream(data)
+        val bytes = inputStream?.readBytes()
+        val mediaType = "image/*".toMediaTypeOrNull()
+        val requestBody = bytes?.let {
+            MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("imagen", "image.jpg", it.toRequestBody(mediaType))
+                .build()
+        }
+        inputStream?.close()
+
+        //Configura la request y hace la petición
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody!!)
+            .build()
+        val response = client.newCall(request).execute()
+        readResponse(data, response)
+    }
+
+    private fun readResponse(data: Uri, response: Response) {
+        //Lee el JSON resultado y obtiene la descripción, objetos y etiquetas
+        val gson = Gson()
+        val jsonResponse = response.body?.string()
+        val jsonObject = gson.fromJson(jsonResponse, JsonObject::class.java)
+
+        val description = jsonObject.getAsJsonObject("descriptionResult")
+            .getAsJsonArray("values").get(0).asJsonObject.get("text").asString
+        val tags = jsonObject.getAsJsonObject("tagsResult")
+            .getAsJsonArray("values").toList()
+        val tagsNames: ArrayList<String> = ArrayList<String>()
+        for (i in tags.indices) {
+            tagsNames.add(tags[i].asJsonObject.get("name").asString)
+        }
+        val objects = jsonObject.getAsJsonObject("objectsResult")
+            .getAsJsonArray("values").toList()
+        val objectsNames: ArrayList<String> = ArrayList<String>()
+        for (i in objects.indices) {
+            objectsNames.add(tags[i].asJsonObject.get("name").asString)
+        }
+
+        //Muestra el resultado en pantalla
+        showResult(data, objectsNames, tagsNames, description)
+    }
+
+    private fun showResult(data: Uri, objectsNames: ArrayList<String>, tagsNames: ArrayList<String>, description: String) {
+        //Presenta el resultado en pantalla
+        runOnUiThread {
+            val text: TextView = findViewById(R.id.texto_resultado)
+            val descriptionMessage = getString(R.string.escena_resultado_descripcion)
+            val objectsMessage = getString(R.string.escena_resultado_objetos)
+            val tagsMessage = getString(R.string.escena_resultado_etiquetas)
+            val result:String = if (objectsNames.size != 0) {
+                "<b>$descriptionMessage</b> $description<br/><br/>" +
+                        "<b>$objectsMessage</b> $objectsNames<br/><br/>" +
+                        "<b>$tagsMessage</b> $tagsNames"
+
+            }else {
+                "<b>$descriptionMessage</b> $description<br/><br/>" +
+                        "<b>$tagsMessage</b> $tagsNames"
+            }
+            val formattedResult = HtmlCompat.fromHtml(result,
+                HtmlCompat.FROM_HTML_MODE_COMPACT)
+            text.text = formattedResult
+            convertTextToSpeech(formattedResult.toString())
+
+            saveRecord(data, result)
+        }
+    }
+
+    private fun saveRecord(uri: Uri, result: String) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
             val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
@@ -330,7 +436,7 @@ class EscenaActivity : BaseActivity() {
         }
     }
 
-    private fun cargarRegistro(imageUrl: String?, textResult: String?) {
+    private fun loadRecord(imageUrl: String?, textResult: String?) {
         val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
         Glide.with(this).load(imageUrl).into(imagenPlaceholder)
         val text: TextView = findViewById(R.id.texto_resultado)

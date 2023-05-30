@@ -1,5 +1,6 @@
 package com.project.tfg.ui.registros
 
+import android.app.ActionBar.LayoutParams
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -74,7 +76,7 @@ class RegistrosFragment : Fragment() {
         _binding = null
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         updateViews()
     }
@@ -94,10 +96,10 @@ class RegistrosFragment : Fragment() {
 
             val deleteBtn: View? = view?.findViewById(R.id.delete_account_btn)
             deleteBtn?.setOnClickListener {
-                eliminarDatosUsuario()
+                deleteUserData()
             }
 
-            cargarRegistros()
+            loadRecords()
 
         } else {
             // Si el usuario no está logueado, inflar el diseño 'fragment_registros'
@@ -111,6 +113,45 @@ class RegistrosFragment : Fragment() {
                 startActivityForResult(emailPassword, LOGIN_REQUEST_CODE)
             }
         }
+    }*/
+
+    private val startForActivityRecognition = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+        updateViews()
+    }
+
+    private fun updateViews() {
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // Si el usuario está logueado, inflar el diseño 'registros'
+            binding.root.removeAllViews()
+            layoutInflater.inflate(R.layout.registros, binding.root)
+
+            val logoutBtn: View? = view?.findViewById(R.id.logout_btn)
+            logoutBtn?.setOnClickListener {
+                signOut()
+            }
+
+            val deleteBtn: View? = view?.findViewById(R.id.delete_account_btn)
+            deleteBtn?.setOnClickListener {
+                deleteUserData()
+            }
+
+            loadRecords()
+
+        } else {
+            // Si el usuario no está logueado, inflar el diseño 'fragment_registros'
+            binding.root.removeAllViews()
+            layoutInflater.inflate(R.layout.fragment_registros, binding.root)
+
+            val accessBtn: View? = view?.findViewById(R.id.access_btn)
+            accessBtn?.setOnClickListener {
+                val emailPassword = Intent(this.context, EmailPasswordActivity::class.java)
+                startForActivityRecognition.launch(emailPassword)
+            }
+        }
     }
 
     private fun signOut()  {
@@ -119,7 +160,7 @@ class RegistrosFragment : Fragment() {
         updateViews()
     }
 
-    private fun eliminarDatosUsuario() {
+    private fun deleteUserData() {
         val user = auth.currentUser
         val userUid = user?.uid
         val storageRef = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid")
@@ -133,7 +174,7 @@ class RegistrosFragment : Fragment() {
                     imageRef.delete()
                 }
 
-                user?.delete()
+/*                user?.delete()
                     ?.addOnSuccessListener {
                         val ref = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/").getReference("$userUid")
                         ref.removeValue()
@@ -145,6 +186,22 @@ class RegistrosFragment : Fragment() {
                             }
                     }
                     ?.addOnFailureListener { e ->
+                    }*/
+
+                //Elimina los datos de la RealtimeDatabase
+                val ref = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/").getReference("$userUid")
+                ref.removeValue()
+                    .addOnSuccessListener {
+                        //Elimina al usuario
+                        user?.delete()
+                            ?.addOnSuccessListener {
+                                convertTextToSpeech(getString(R.string.delete_correct))
+                                updateViews()
+                            }
+                            ?.addOnFailureListener { e ->
+                            }
+                    }
+                    .addOnFailureListener { e ->
                     }
             }
             .addOnFailureListener { e ->
@@ -251,7 +308,7 @@ class RegistrosFragment : Fragment() {
         }
     }*/
 
-    private fun cargarRegistros() {
+    private fun loadRecords() {
         val gridView = view?.findViewById<GridLayout>(R.id.image_grid)
         gridView?.removeAllViews()
         val user = auth.currentUser
@@ -259,16 +316,16 @@ class RegistrosFragment : Fragment() {
 
         val database = FirebaseDatabase.getInstance("https://seeit-4fe0d-default-rtdb.europe-west1.firebasedatabase.app/")
         var ref = database.getReference("$userUid/texto")
-        descargarRegistros(ref, "Texto")
+        readDatabase(ref, "Texto")
 
         ref = database.getReference("$userUid/escena")
-        descargarRegistros(ref, "Escena")
+        readDatabase(ref, "Escena")
 
         ref = database.getReference("$userUid/traducir")
-        descargarRegistros(ref, "Traducir")
+        readDatabase(ref, "Traducir")
     }
 
-    private fun descargarRegistros(ref: DatabaseReference, tipo: String) {
+    private fun readDatabase(ref: DatabaseReference, tipo: String) {
         val gridView = view?.findViewById<GridLayout>(R.id.image_grid)
 
         // Listener a la referencia para obtener los datos de cada registro
@@ -279,12 +336,18 @@ class RegistrosFragment : Fragment() {
                 val imageUrl = registroSnapshot.child("image_url").value.toString()
                 val imageView = ImageView(requireContext())
                 val params = GridLayout.LayoutParams(
-                    GridLayout.spec(GridLayout.UNDEFINED, 1f),
-                    GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                    GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f),
+                    GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)
                 )
                 params.setMargins(8, 8, 8, 8)
                 imageView.layoutParams = params
-                Glide.with(requireContext()).load(imageUrl).into(imageView)
+                val desiredWidth = resources.getDimensionPixelSize(R.dimen.image_width)
+                val desiredHeight = resources.getDimensionPixelSize(R.dimen.image_height)
+                Glide.with(requireContext())
+                    .load(imageUrl)
+                    .override(desiredWidth, desiredHeight)
+                    .into(imageView)
+                gridView?.columnCount = 3
                 gridView?.addView(imageView)
 
                 when (tipo) {

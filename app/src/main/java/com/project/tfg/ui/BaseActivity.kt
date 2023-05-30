@@ -152,7 +152,7 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun functionality(data: Uri)
 
     fun convertTextToSpeech(text: String) {
-        textToSpeech = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
+        textToSpeech = TextToSpeech(this, { status ->
             if (status == TextToSpeech.SUCCESS) {
                 // El TextToSpeech se inicializó correctamente, ahora se puede llamar al método speak()
                 textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
