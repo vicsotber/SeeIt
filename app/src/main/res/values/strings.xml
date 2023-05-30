@@ -7,7 +7,7 @@
     </string>
     <string name="nombre_funcionalidad_escenas">Escena</string>
     <string name="descripción_texto">Funcionalidad Texto: Selecciona esta funcionalidad
-         para que el texto en una imagen sea leído en voz alta</string>
+         para identificar el texto en una imagen y que sea leído en voz alta</string>
     <string name="nombre_funcionalidad_texto">Texto</string>
     <string name="descripción_categorias">Funcionalidad Categorías: Selecciona esta
         funcionalidad para identificar un objeto entre una serie de categorías</string>
