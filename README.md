@@ -14,7 +14,7 @@
   <br/>
 
   <p align="center">
-    Travel together, save money, save the planet ♻️
+    Descubre el mundo a través de imágenes 👁️
     <br />
     <br />
     <a href="https://github.com/vicsotber/TFG/issues">Report Bug</a>
