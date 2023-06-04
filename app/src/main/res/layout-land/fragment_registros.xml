@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/access_advice"
         android:layout_width="340dp"
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
@@ -40,6 +40,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/access_advice"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
