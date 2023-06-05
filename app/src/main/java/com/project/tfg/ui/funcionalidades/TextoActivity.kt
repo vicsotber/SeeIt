@@ -79,6 +79,7 @@ class TextoActivity : BaseActivity() {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
 
         //Utiliza el TextRecognizer de MLKit y muestra el texto en pantalla
+        //También lanza el método que guarda el registro si estamos logueados
         recognizer.process(imagen)
             .addOnSuccessListener { visionText ->
                 val text: TextView = findViewById(R.id.texto_resultado)
@@ -98,7 +99,7 @@ class TextoActivity : BaseActivity() {
     private fun saveRecord(uri: Uri, visionText: Text) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
-            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
+            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/texto/${uri.lastPathSegment}")
             val uploadTask = storageRef.putFile(uri)
             uploadTask.addOnSuccessListener { taskSnapshot ->
                 // La imagen se ha subido exitosamente a Firebase Storage

@@ -104,7 +104,7 @@ class TraducirActivity : BaseActivity() {
             val waiting = getString(R.string.traduccion_esperando)
             traduccionResultado.setText(waiting)
             convertTextToSpeech(waiting)
-            translateText(data)
+            recognizeText(data)
         }
     }
 
@@ -160,7 +160,7 @@ class TraducirActivity : BaseActivity() {
             }
     }*/
 
-    private fun translateText(data: Uri) {
+    private fun recognizeText(data: Uri) {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
 
         //Realiza el reconocimiento de texto
@@ -244,7 +244,7 @@ class TraducirActivity : BaseActivity() {
     private fun saveRecord(uri: Uri, visionText: Text, translatedText: String) {
         val userUid = FirebaseAuth.getInstance().currentUser?.uid
         if (userUid != null) {
-            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/${uri.lastPathSegment}")
+            val storageRef: StorageReference = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid/traducir/${uri.lastPathSegment}")
             val uploadTask = storageRef.putFile(uri)
             uploadTask.addOnSuccessListener { taskSnapshot ->
                 // La imagen se ha subido exitosamente a Firebase Storage
