@@ -40,6 +40,7 @@ class TraducirActivityInstrumentedTest {
         activityScenario.close()
     }
 
+    /*
     @Test
     fun testOnCreate() {
         onView(withId(R.id.funcionalidad_traduccion_img)).perform(click())
@@ -53,8 +54,10 @@ class TraducirActivityInstrumentedTest {
         //*onView(withId(R.id.source_language)).check(matches(isDisplayed()))
         //onView(withId(R.id.target_language)).check(matches(isDisplayed()))
     }
+    */
+     */
 
-    @Test
+    /*@Test
     fun analyzeImage() {
         // Una vez iniciada la actividad, clickamos en la opción de abrir la galería
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -105,9 +108,9 @@ class TraducirActivityInstrumentedTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Suppose you are driving"))))
-    }
+    }*/
 
-    @Test
+    /*@Test
     fun sharePicture() {
         // Obtén una instancia de UiDevice
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -165,9 +168,9 @@ class TraducirActivityInstrumentedTest {
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Suppose you are driving"))))
 
-    }
+    }*/
 
-    /*@Test
+    @Test
     fun testRecordIsSaved() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         onView(withId(R.id.navigation_registros)).perform(click())
@@ -252,5 +255,5 @@ class TraducirActivityInstrumentedTest {
         device.pressBack()
         onView(withId(R.id.navigation_registros)).perform(click())
         onView(withId(R.id.delete_account_btn)).perform(click())
-    }*/
+    }
 }

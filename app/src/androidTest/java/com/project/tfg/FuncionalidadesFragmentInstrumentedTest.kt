@@ -58,11 +58,23 @@ class FuncionalidadesFragmentInstrumentedTest {
     @Test
     fun imageView_hasCorrectContentDescription() {
         // Selecciona el ImageView que quieres comprobar
-        val imageView = onView(withId(R.id.CategoriasView))
+        var imageView = onView(withId(R.id.CategoriasView))
 
         // Comprueba que el ImageView está visible y tiene el texto alternativo correcto
         imageView.check(matches(isDisplayed()))
         imageView.check(matches(withContentDescription(R.string.descripción_categorias)))
+
+        imageView = onView(withId(R.id.EscenaView))
+        imageView.check(matches(isDisplayed()))
+        imageView.check(matches(withContentDescription(R.string.descripción_escenas)))
+
+        imageView = onView(withId(R.id.TraducirView))
+        imageView.check(matches(isDisplayed()))
+        imageView.check(matches(withContentDescription(R.string.descripción_traduccion)))
+
+        imageView = onView(withId(com.project.tfg.R.id.TextoView))
+        imageView.check(matches(isDisplayed()))
+        imageView.check(matches(withContentDescription(R.string.descripción_texto)))
     }
 
     @Test

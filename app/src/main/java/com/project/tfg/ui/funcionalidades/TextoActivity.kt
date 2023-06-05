@@ -79,6 +79,7 @@ class TextoActivity : BaseActivity() {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
 
         //Utiliza el TextRecognizer de MLKit y muestra el texto en pantalla
+        //También lanza el método que guarda el registro si estamos logueados
         recognizer.process(imagen)
             .addOnSuccessListener { visionText ->
                 val text: TextView = findViewById(R.id.texto_resultado)

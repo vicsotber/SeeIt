@@ -50,7 +50,7 @@ class RegistrosFragmentInstrumentedTest {
         }
     }*/
 
-    @Before
+/*    @Before
     fun setUp() {
         FirebaseAuth.getInstance().signOut()
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
@@ -72,6 +72,19 @@ class RegistrosFragmentInstrumentedTest {
         onView(withId(R.id.login_btn)).perform(ViewActions.scrollTo(), click())
         //Thread.sleep(
         // 250000)
+        Thread.sleep(2000)
+    }*/
+
+    @Before
+    fun setUp() {
+        FirebaseAuth.getInstance().signOut()
+        activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        auth = Firebase.auth
+
+        val email = "test_registros@test.com"
+        val password = "Test1234@Test"
+
+        auth.signInWithEmailAndPassword(email, password)
         Thread.sleep(2000)
     }
 
@@ -146,8 +159,8 @@ class RegistrosFragmentInstrumentedTest {
 
     @Test
     fun checkRecordText() {
+        onView(withId(R.id.navigation_registros)).perform(click())
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
 
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
@@ -179,6 +192,7 @@ class RegistrosFragmentInstrumentedTest {
 
     @Test
     fun checkRecordTranslation() {
+        onView(withId(R.id.navigation_registros)).perform(click())
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
         // Encuentra el GridLayout que contiene las imágenes
@@ -213,6 +227,7 @@ class RegistrosFragmentInstrumentedTest {
 
     @Test
     fun checkRecordScene() {
+        onView(withId(R.id.navigation_registros)).perform(click())
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
         // Encuentra el GridLayout que contiene las imágenes

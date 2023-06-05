@@ -104,7 +104,7 @@ class TraducirActivity : BaseActivity() {
             val waiting = getString(R.string.traduccion_esperando)
             traduccionResultado.setText(waiting)
             convertTextToSpeech(waiting)
-            translateText(data)
+            recognizeText(data)
         }
     }
 
@@ -160,7 +160,7 @@ class TraducirActivity : BaseActivity() {
             }
     }*/
 
-    private fun translateText(data: Uri) {
+    private fun recognizeText(data: Uri) {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
 
         //Realiza el reconocimiento de texto

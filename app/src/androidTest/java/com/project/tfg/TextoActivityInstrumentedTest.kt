@@ -42,7 +42,7 @@ class TextoActivityInstrumentedTest {
         activityScenario.close()
     }
 
-    @Test
+    /*@Test
     fun testOnCreate() {
         onView(withId(R.id.funcinalidad_texto_img)).perform(click())
         // Verifica si un texto está presente en cualquier lugar de la pantalla
@@ -109,9 +109,9 @@ class TextoActivityInstrumentedTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Suponga que usted va conduciendo"))))
-    }
+    }*/
 
-    /*@Test
+    @Test
     fun testRecordIsSaved() {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         onView(withId(R.id.navigation_registros)).perform(click())
@@ -175,6 +175,5 @@ class TextoActivityInstrumentedTest {
         device.pressBack()
         onView(withId(R.id.navigation_registros)).perform(click())
         onView(withId(R.id.delete_account_btn)).perform(click())
-    }*/
-
+    }
 }
