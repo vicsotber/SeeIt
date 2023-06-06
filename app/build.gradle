@@ -13,6 +13,10 @@ android {
     namespace 'com.project.tfg'
     compileSdk 33
 
+    aaptOptions {
+        noCompress "tflite"
+    }
+
     defaultConfig {
         applicationId "com.project.tfg"
         minSdkVersion 21
@@ -21,8 +25,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "AZURE_API_KEY", getApiKey())
     }
 
     buildTypes {

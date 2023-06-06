@@ -13,7 +13,7 @@
         tools:context=".MainActivity">
 
         <ImageView
-            android:id="@+id/imagePlaceholder"
+            android:id="@+id/image_placeholder"
             android:layout_width="355dp"
             android:layout_height="244dp"
             android:layout_marginTop="4dp"
@@ -34,7 +34,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagePlaceholder" />
+            app:layout_constraintTop_toBottomOf="@+id/image_placeholder" />
 
         <TextView
             android:id="@+id/texto_resultado"

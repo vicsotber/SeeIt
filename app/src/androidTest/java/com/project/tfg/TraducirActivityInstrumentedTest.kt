@@ -3,7 +3,6 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -11,7 +10,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.*
 import com.google.firebase.auth.FirebaseAuth
-import com.project.tfg.ui.funcionalidades.TraducirActivity
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.After
 import org.junit.Before
@@ -40,26 +38,20 @@ class TraducirActivityInstrumentedTest {
         activityScenario.close()
     }
 
-    /*
+
     @Test
     fun testOnCreate() {
         onView(withId(R.id.funcionalidad_traduccion_img)).perform(click())
-        // Verifica si un texto está presente en cualquier lugar de la pantalla
         onView(withText("Galería"))
             .check(matches(isDisplayed()))
         onView(withText("Cámara"))
             .check(matches(isDisplayed()))
         onView(withText("Cancelar"))
             .check(matches(isDisplayed()))
-        //*onView(withId(R.id.source_language)).check(matches(isDisplayed()))
-        //onView(withId(R.id.target_language)).check(matches(isDisplayed()))
     }
-    */
-     */
 
-    /*@Test
+    @Test
     fun analyzeImage() {
-        // Una vez iniciada la actividad, clickamos en la opción de abrir la galería
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
         onView(withId(R.id.funcionalidad_traduccion_img)).perform(click())
@@ -71,8 +63,7 @@ class TraducirActivityInstrumentedTest {
         // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
         val image: UiObject2 = device.findObject(By.text("texto_test.jpg"))
         image.click()
-
-        // Esperamos a que se nos devuelva a nuestra aplicación y a que realice el reconocimiento de texto
+        // Esperamos a que se nos devuelva a nuestra aplicación
         device.waitForIdle()
 
         val sourceSpinner = onView(withId(R.id.spinner_source_language))
@@ -103,20 +94,15 @@ class TraducirActivityInstrumentedTest {
             .check(matches(withText(R.string.traduccion_esperando)))
         Thread.sleep(300000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Suppose you are driving"))))
-    }*/
+    }
 
-    /*@Test
+    @Test
     fun sharePicture() {
-        // Obtén una instancia de UiDevice
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
-        // Abre la aplicación o actividad que contiene la opción de seleccionar imagen de la galería
-        // Puedes utilizar el nombre del paquete o el nombre de la actividad para abrir la aplicación
 
         device.pressHome() // Vuelve a la pantalla de inicio (opcional)
         val galleryApp = device.findObject(By.desc("Archivos"))
@@ -162,13 +148,12 @@ class TraducirActivityInstrumentedTest {
             .check(matches(withText(R.string.traduccion_esperando)))
         Thread.sleep(300000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Suppose you are driving"))))
 
-    }*/
+    }
 
     @Test
     fun testRecordIsSaved() {
@@ -195,9 +180,8 @@ class TraducirActivityInstrumentedTest {
         Thread.sleep(5000)
 
         // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
-        device.swipe(147, 1193, 147, 1193, 0);
-
-        // Esperamos a que se nos devuelva a nuestra aplicación y a que realice el reconocimiento de texto
+        device.swipe(147, 1193, 147, 1193, 0)
+        // Esperamos a que se nos devuelva a nuestra aplicación
         device.waitForIdle()
 
         val sourceSpinner = onView(withId(R.id.spinner_source_language))
@@ -223,28 +207,21 @@ class TraducirActivityInstrumentedTest {
         device.pressBack()
         onView(withId(R.id.navigation_registros)).perform(click())
         Thread.sleep(5000)
+
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
-
         // Encuentra el número total de columnas en el GridLayout
         val numColumnas = gridLayout.childCount
-
         // Encuentra la posición de la imagen específica en el GridLayout
         val filaObjetivo = 0 // Fila deseada (comienza en 0)
-
         val columnaObjetivo = 0 // Columna deseada (comienza en 0)
-
         val posicionObjetivo = filaObjetivo * numColumnas + columnaObjetivo
-
         // Encuentra la imagen específica utilizando la posición en el GridLayout
         val imagenEspecifica = gridLayout.children[posicionObjetivo]
-
         // Haz clic en la imagen específica
         imagenEspecifica.click()
-
         Thread.sleep(2000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))

@@ -13,7 +13,6 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.google.firebase.auth.FirebaseAuth
-import com.project.tfg.ui.funcionalidades.EscenaActivity
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.After
 import org.junit.Before
@@ -42,10 +41,9 @@ class EsecenaActivityInstrumentedTest {
         activityScenario.close()
     }
 
-    /*@Test
+    @Test
     fun testOnCreate() {
         onView(withId(R.id.funcionalidad_escena_img)).perform(click())
-        // Verifica si un texto está presente en cualquier lugar de la pantalla
         onView(withText("Galería"))
             .check(matches(isDisplayed()))
         onView(withText("Cámara"))
@@ -56,23 +54,16 @@ class EsecenaActivityInstrumentedTest {
 
     @Test
     fun analyzeImage() {
-        // Una vez iniciada la actividad, clickamos en la opción de abrir la galería
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         onView(withId(R.id.funcionalidad_escena_img)).perform(click())
         onView(withText("Galería")).perform(click())
-
-        // Esperamos un tiempo para dar tiempo a que la galería se abra
         Thread.sleep(2000)
 
-        // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
         val image: UiObject2 = device.findObject(By.text("plato_frutas_escena.jpg"))
         image.click()
-
-        // Esperamos a que se nos devuelva a nuestra aplicación y a que realice el reconocimiento de texto
         device.waitForIdle()
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
@@ -83,29 +74,22 @@ class EsecenaActivityInstrumentedTest {
 
     @Test
     fun sharePicture() {
-        // Obtén una instancia de UiDevice
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
-        // Abre la aplicación o actividad que contiene la opción de seleccionar imagen de la galería
-        // Puedes utilizar el nombre del paquete o el nombre de la actividad para abrir la aplicación
-
-        device.pressHome() // Vuelve a la pantalla de inicio (opcional)
+        device.pressHome()
         val galleryApp = device.findObject(By.desc("Archivos"))
         galleryApp.click()
         Thread.sleep(5000)
 
-        // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
         val image: UiObject2 = device.findObject(By.text("plato_frutas_escena.jpg"))
         image.click(5000)
 
         device.findObject(By.clickable(true).descContains("Compartir")).click()
         Thread.sleep(6000)
         device.findObject(By.text("Escena")).click()
-
         device.waitForIdle()
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
@@ -113,7 +97,7 @@ class EsecenaActivityInstrumentedTest {
         onView(withId(R.id.texto_resultado))
             .check(matches(withText(containsString("Objetos detectados en la imagen"))))
 
-    }*/
+    }
 
     @Test
     fun testRecordIsSaved() {
@@ -135,42 +119,28 @@ class EsecenaActivityInstrumentedTest {
         onView(withId(R.id.navigation_funcionalidades)).perform(click())
         device.findObject(By.text("Escena")).click()
         onView(withText("Galería")).perform(click())
-
-        // Esperamos un tiempo para dar tiempo a que la galería se abra
         Thread.sleep(5000)
 
-        // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
-        device.swipe(571, 993, 571, 993, 0);
-
-        // Esperamos a que se nos devuelva a nuestra aplicación y a que realice el reconocimiento de texto
+        device.swipe(571, 993, 571, 993, 0)
         device.waitForIdle()
         Thread.sleep(5000)
 
         device.pressBack()
         onView(withId(R.id.navigation_registros)).perform(click())
         Thread.sleep(5000)
+
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
-
         // Encuentra el número total de columnas en el GridLayout
         val numColumnas = gridLayout.childCount
-
         // Encuentra la posición de la imagen específica en el GridLayout
         val filaObjetivo = 0 // Fila deseada (comienza en 0)
-
         val columnaObjetivo = 0 // Columna deseada (comienza en 0)
-
         val posicionObjetivo = filaObjetivo * numColumnas + columnaObjetivo
-
-        // Encuentra la imagen específica utilizando la posición en el GridLayout
         val imagenEspecifica = gridLayout.children[posicionObjetivo]
-
-        // Haz clic en la imagen específica
         imagenEspecifica.click()
-
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))

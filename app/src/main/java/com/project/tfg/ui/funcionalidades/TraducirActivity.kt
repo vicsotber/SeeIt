@@ -55,7 +55,7 @@ class TraducirActivity : BaseActivity() {
             if (type.startsWith("image/")) {
                 val imageUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri?
                 if (imageUri != null) {
-                    val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+                    val imagenPlaceholder: ImageView = findViewById(R.id.image_placeholder)
                     imagenPlaceholder.setImageURI(imageUri)
                     functionality(imageUri)
                 }
@@ -287,7 +287,7 @@ class TraducirActivity : BaseActivity() {
             }
 
         //Posteriormente muestra la imagen, el texto reconocido en la imagen, y el texto traducido
-        val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+        val imagenPlaceholder: ImageView = findViewById(R.id.image_placeholder)
         Glide.with(this).load(imageUrl).into(imagenPlaceholder)
         val text: TextView = findViewById(R.id.texto_resultado)
 
