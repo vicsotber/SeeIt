@@ -2,6 +2,7 @@ package com.project.tfg
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -32,6 +33,7 @@ class TextoActivityInstrumentedTest {
 
     @Before
     fun setUp() {
+        AccessibilityChecks.enable()
         FirebaseAuth.getInstance().signOut()
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
     }
@@ -88,6 +90,7 @@ class TextoActivityInstrumentedTest {
         // Seleccionamos la imagen con texto que tiene como título 'texto_test.jpg'
         val image: UiObject2 = device.findObject(By.text("texto_test.jpg"))
         image.click(5000)
+        Thread.sleep(2000)
 
         device.findObject(By.clickable(true).descContains("Compartir")).click()
         Thread.sleep(6000)

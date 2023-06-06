@@ -2,6 +2,7 @@ package com.project.tfg
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -32,6 +33,7 @@ class EsecenaActivityInstrumentedTest {
 
     @Before
     fun setUp() {
+        AccessibilityChecks.enable()
         FirebaseAuth.getInstance().signOut()
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
     }
