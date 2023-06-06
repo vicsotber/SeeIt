@@ -82,4 +82,17 @@
     <string name="logout_correct">Sesión cerrada correctamente</string>
     <string name="delete_title">Borrar cuenta</string>
     <string name="delete_correct">La cuenta y todos sus datos se ha borrado satisfactoriamente</string>
+
+    <string name="category_food">Comida</string>
+    <string name="category_food_description">Categoría comida: selecciona esta categoría para identificar diferentes tipos de comida en imágenes</string>
+    <string name="category_birds">Aves</string>
+    <string name="category_birds_description">Categoría aves: selecciona esta categoría para identificar diferentes tipos de aves en imágenes</string>
+    <string name="category_insects">Insectos</string>
+    <string name="category_insects_description">Categoría insectos: selecciona esta categoría para identificar diferentes tipos de insectos en imágenes</string>
+    <string name="category_plants">Plantas</string>
+    <string name="category_plants_description">Categoría plantas: selecciona esta categoría para identificar diferentes tipos de plantas en imágenes</string>
+    <string name="category_labelling_error">Se ha producido un error inesperado durante la identificación de la imagen. Inténtelo más tarde.</string>
+    <string name="object_unknown">No se ha identificado ningún objeto de la categoría seleccionada en la imagen</string>
+    <string name="category_result_object">Objeto de la categoría detectado en la imagen:</string>
+    <string name="category_result_confidence">Porcentaje de confianza:</string>
 </resources>

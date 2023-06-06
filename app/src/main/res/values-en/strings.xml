@@ -86,4 +86,17 @@
     <string name="logout_correct">Sesión cerrada correctamente</string>
     <string name="delete_title">Delete account</string>
     <string name="delete_correct">The account and all its data have been deleted correctly</string>
+
+    <string name="category_food">Food</string>
+    <string name="category_food_description">Food category: Select this category to identify different types of food in images</string>
+    <string name="category_birds">Birds</string>
+    <string name="category_birds_description">Birds category: select this category to identify different types of birds in images</string>
+    <string name="category_insects">Insects</string>
+    <string name="category_insects_description">Insects category: select this category to identify different types of insects in images</string>
+    <string name="category_plants">Plants</string>
+    <string name="category_plants_description">Plants category: select this category to identify different types of plants in images</string>
+    <string name="category_labelling_error">There has been an unexpected error during the image identification. Try again later.</string>
+    <string name="object_unknown">It was not possible to identify any object of the selected category in the image</string>
+    <string name="category_result_object">Object of the category detected in the image:</string>
+    <string name="category_result_confidence">Confidence percetage:</string>
 </resources>

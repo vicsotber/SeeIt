@@ -24,9 +24,8 @@ class FuncionalidadesFragment : Fragment() {
     ): View {
 
         _binding = FragmentFuncionalidadesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -36,28 +35,28 @@ class FuncionalidadesFragment : Fragment() {
 
     override fun onViewCreated(views:View, savedInstanceState: Bundle?)
     {
-        val categoriasView: View? = view?.findViewById(R.id.CategoriasView)
-        categoriasView?.setOnClickListener(View.OnClickListener {
+        val categoriasView: View? = view?.findViewById(R.id.categorias_view)
+        categoriasView?.setOnClickListener {
             val categorias = Intent(this.context, CategoriasActivity::class.java)
             startActivity(categorias)
-        })
+        }
 
-        val textoView: View? = view?.findViewById(R.id.TextoView)
-        textoView?.setOnClickListener(View.OnClickListener {
+        val textoView: View? = view?.findViewById(R.id.texto_view)
+        textoView?.setOnClickListener {
             val texto = Intent(this.context, TextoActivity::class.java)
             startActivity(texto)
-        })
+        }
 
-        val escenaView: View? = view?.findViewById(R.id.EscenaView)
-        escenaView?.setOnClickListener(View.OnClickListener {
+        val escenaView: View? = view?.findViewById(R.id.escena_view)
+        escenaView?.setOnClickListener {
             val escena = Intent(this.context, EscenaActivity::class.java)
             startActivity(escena)
-        })
+        }
 
-        val traduccionView: View? = view?.findViewById(R.id.TraducirView)
-        traduccionView?.setOnClickListener(View.OnClickListener {
+        val traduccionView: View? = view?.findViewById(R.id.traducir_view)
+        traduccionView?.setOnClickListener {
             val traducir = Intent(this.context, TraducirActivity::class.java)
             startActivity(traducir)
-        })
+        }
     }
 }

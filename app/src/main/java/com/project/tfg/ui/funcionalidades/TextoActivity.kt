@@ -39,7 +39,7 @@ class TextoActivity : BaseActivity() {
             if (type.startsWith("image/")) {
                 val imageUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri?
                 if (imageUri != null) {
-                    val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+                    val imagenPlaceholder: ImageView = findViewById(R.id.image_placeholder)
                     imagenPlaceholder.setImageURI(imageUri)
                     functionality(imageUri)
                 }
@@ -129,7 +129,7 @@ class TextoActivity : BaseActivity() {
     }
 
     private fun loadRecord(imageUrl: String?, textResult: String?) {
-        val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+        val imagenPlaceholder: ImageView = findViewById(R.id.image_placeholder)
         Glide.with(this).load(imageUrl).into(imagenPlaceholder)
         val text: TextView = findViewById(R.id.texto_resultado)
         text.setText(textResult)

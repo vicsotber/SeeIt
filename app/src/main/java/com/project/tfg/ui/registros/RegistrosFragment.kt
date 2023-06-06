@@ -1,6 +1,5 @@
 package com.project.tfg.ui.registros
 
-import android.app.ActionBar.LayoutParams
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -20,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.project.tfg.R
 import com.project.tfg.databinding.FragmentRegistrosBinding
+import com.project.tfg.ui.funcionalidades.CategoriaEspecificaActivity
 import com.project.tfg.ui.funcionalidades.EscenaActivity
 import com.project.tfg.ui.funcionalidades.TextoActivity
 import com.project.tfg.ui.funcionalidades.TraducirActivity
@@ -166,12 +166,22 @@ class RegistrosFragment : Fragment() {
         val storageRef = FirebaseStorage.getInstance("gs://seeit-4fe0d.appspot.com/").getReference("$userUid")
         storageRef.listAll()
             .addOnSuccessListener { listResult ->
-                // Obtiene una lista de las referencias a las imágenes del usuario
-                val allImages = listResult.items
+                // Obtiene una lista de las subcarpetas del usuario
+                val subfolders = listResult.prefixes
 
-                // Elimina cada imagen de forma iterativa
-                allImages.forEach { imageRef ->
-                    imageRef.delete()
+                // Recorre cada subcarpeta
+                subfolders.forEach { subfolderRef ->
+                    // Utiliza el método listAll() para obtener la lista de imágenes dentro de la subcarpeta
+                    subfolderRef.listAll()
+                        .addOnSuccessListener { subfolderListResult ->
+                            // Obtiene una lista de las imágenes dentro de la subcarpeta
+                            val images = subfolderListResult.items
+
+                            // Elimina cada imagen de forma iterativa
+                            images.forEach { imageRef ->
+                                imageRef.delete()
+                            }
+                        }
                 }
 
 /*                user?.delete()
@@ -323,6 +333,9 @@ class RegistrosFragment : Fragment() {
 
         ref = database.getReference("$userUid/traducir")
         readDatabase(ref, "Traducir")
+
+        ref = database.getReference("$userUid/categorias")
+        readDatabase(ref, "Categorias")
     }
 
     private fun readDatabase(ref: DatabaseReference, tipo: String) {
@@ -367,12 +380,20 @@ class RegistrosFragment : Fragment() {
                             startActivity(intent)
                         }
                     }
-                    else -> {
+                    "Traducir" -> {
                         imageView.setOnClickListener {
                             val intent = Intent(requireContext(), TraducirActivity::class.java)
                             intent.putExtra("IMAGE_URL", imageUrl)
                             intent.putExtra("TEXT_RECOGNIZED", registroSnapshot.child("text_recognized").value.toString())
                             intent.putExtra("TEXT_TRANSLATED", registroSnapshot.child("text_translated").value.toString())
+                            startActivity(intent)
+                        }
+                    }
+                    else -> {
+                        imageView.setOnClickListener {
+                            val intent = Intent(requireContext(), CategoriaEspecificaActivity::class.java)
+                            intent.putExtra("IMAGE_URL", imageUrl)
+                            intent.putExtra("TEXT_RESULT", registroSnapshot.child("text_result").value.toString())
                             startActivity(intent)
                         }
                     }

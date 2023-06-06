@@ -16,13 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG"
         tools:targetApi="31">
-        <!--<activity
-            android:name=".ui.funcionalidades.PerrosActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>-->
         <activity
             android:name="com.project.tfg.ui.registros.EmailPasswordActivity"
             android:configChanges="orientation|screenSize"
@@ -84,6 +77,64 @@
         <activity
             android:name=".ui.funcionalidades.CategoriasActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.funcionalidades.ComidaCategoriaActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="Comida">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".ui.funcionalidades.CategoriaEspecificaActivity" android:exported="false">
+        </activity>
+        <activity
+            android:name=".ui.funcionalidades.AvesCategoriaActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="Aves">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.funcionalidades.InsectosCategoriaActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="Insectos">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.funcionalidades.PlantasCategoriaActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:label="Plantas">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

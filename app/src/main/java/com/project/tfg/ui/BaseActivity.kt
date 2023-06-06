@@ -142,7 +142,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data?.data
             if (data != null) {
-                val imagenPlaceholder: ImageView = findViewById(R.id.imagePlaceholder)
+                val imagenPlaceholder: ImageView = findViewById(R.id.image_placeholder)
                 imagenPlaceholder.setImageURI(data)
                 functionality(data)
             }

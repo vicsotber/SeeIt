@@ -35,21 +35,6 @@ class RegistrosFragmentInstrumentedTest {
     private lateinit var activityScenario: ActivityScenario<MainActivity>
     private lateinit var auth: FirebaseAuth
 
-    /*@Before
-    fun setUp() {
-        auth = Firebase.auth
-        val email = "test_registros@test.com"
-        val password = "Test1234@Test"
-
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                activityScenario = ActivityScenario.launch(MainActivity::class.java)
-            }else{
-                activityScenario = ActivityScenario.launch(MainActivity::class.java)
-            }
-        }
-    }*/
-
 /*    @Before
     fun setUp() {
         FirebaseAuth.getInstance().signOut()
@@ -100,17 +85,6 @@ class RegistrosFragmentInstrumentedTest {
         onView(withId(R.id.logout_btn)).check(matches(isDisplayed()))
         onView(withId(R.id.delete_account_btn)).check(matches(isDisplayed()))
     }
-
-    /*@Test
-    fun verifyElementsInLandscape() {
-        activityRule.scenario.onActivity {
-            it.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        }
-
-        onView(withId(R.id.navigation_registros)).perform(click())
-        onView(withId(R.id.logout_btn)).check(matches(isDisplayed()))
-        onView(withId(R.id.delete_account_btn)).check(matches(isDisplayed()))
-    }*/
 
     @Test
     fun logOutTest() {
@@ -164,26 +138,18 @@ class RegistrosFragmentInstrumentedTest {
 
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
-
         // Encuentra el número total de columnas en el GridLayout
         val numColumnas = gridLayout.childCount
-
         // Encuentra la posición de la imagen específica en el GridLayout
         val filaObjetivo = 0 // Fila deseada (comienza en 0)
-
         val columnaObjetivo = 0 // Columna deseada (comienza en 0)
-
         val posicionObjetivo = filaObjetivo * numColumnas + columnaObjetivo
-
         // Encuentra la imagen específica utilizando la posición en el GridLayout
         val imagenEspecifica = gridLayout.children[posicionObjetivo]
-
         // Haz clic en la imagen específica
         imagenEspecifica.click()
-
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
@@ -197,26 +163,18 @@ class RegistrosFragmentInstrumentedTest {
 
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
-
         // Encuentra el número total de columnas en el GridLayout
         val numColumnas = gridLayout.childCount
-
         // Encuentra la posición de la imagen específica en el GridLayout
         val filaObjetivo = 0 // Fila deseada (comienza en 0)
-
         val columnaObjetivo = 2 // Columna deseada (comienza en 0)
-
         val posicionObjetivo = filaObjetivo * numColumnas + columnaObjetivo
-
         // Encuentra la imagen específica utilizando la posición en el GridLayout
         val imagenEspecifica = gridLayout.children[posicionObjetivo]
-
         // Haz clic en la imagen específica
         imagenEspecifica.click()
-
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
@@ -232,26 +190,18 @@ class RegistrosFragmentInstrumentedTest {
 
         // Encuentra el GridLayout que contiene las imágenes
         val gridLayout = device.findObject(By.clazz("android.widget.GridLayout"))
-
         // Encuentra el número total de columnas en el GridLayout
         val numColumnas = gridLayout.childCount
-
         // Encuentra la posición de la imagen específica en el GridLayout
         val filaObjetivo = 0 // Fila deseada (comienza en 0)
-
         val columnaObjetivo = 1 // Columna deseada (comienza en 0)
-
         val posicionObjetivo = filaObjetivo * numColumnas + columnaObjetivo
-
         // Encuentra la imagen específica utilizando la posición en el GridLayout
         val imagenEspecifica = gridLayout.children[posicionObjetivo]
-
         // Haz clic en la imagen específica
         imagenEspecifica.click()
-
         Thread.sleep(5000)
 
-        // El texto reconocido debería aparecer en pantalla
         onView(withId(R.id.texto_resultado))
             .check(matches(isDisplayed()))
         onView(withId(R.id.texto_resultado))
