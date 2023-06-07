@@ -10,20 +10,20 @@
         android:id="@+id/traducir_view"
         android:layout_width="144dp"
         android:layout_height="142dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="28dp"
         android:clickable="true"
         android:contentDescription="@string/descripción_traduccion"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/categorias_view" />
 
     <TextView
         android:id="@+id/funcionalidad_traduccion_nombre"
-        android:layout_width="123dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="151dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:text="@string/nombre_funcionalidad_traduccion"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/traducir_view"
@@ -38,13 +38,15 @@
         android:clickable="true"
         android:contentDescription="@string/descripción_escenas"
         android:focusable="true"
+        app:layout_constraintEnd_toStartOf="@+id/categorias_view"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/funcionalidad_escena_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="34dp"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="4dp"
         android:text="@string/nombre_funcionalidad_escenas"
@@ -57,12 +59,11 @@
         android:layout_width="143dp"
         android:layout_height="142dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
         android:clickable="true"
         android:contentDescription="@string/descripción_categorias"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.695"
-        app:layout_constraintStart_toEndOf="@+id/escena_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -82,23 +83,26 @@
         android:layout_width="144dp"
         android:layout_height="142dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="48dp"
         android:clickable="true"
         android:contentDescription="@string/descripción_texto"
         android:focusable="true"
+        app:layout_constraintEnd_toStartOf="@+id/traducir_view"
+        app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/escena_view" />
 
     <TextView
         android:id="@+id/funcionalidad_texto_nombre"
-        android:layout_width="64dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="77dp"
+        android:layout_height="33dp"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="8dp"
         android:text="@string/nombre_funcionalidad_texto"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/texto_view"
+        app:layout_constraintEnd_toEndOf="@+id/texto_view"
+        app:layout_constraintHorizontal_bias="0.641"
         app:layout_constraintStart_toStartOf="@+id/texto_view"
         app:layout_constraintTop_toBottomOf="@+id/funcinalidad_texto_img"
         app:layout_constraintVertical_bias="0.0" />
@@ -130,14 +134,14 @@
 
     <TextView
         android:id="@+id/funcionalidad_categorias_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="134dp"
+        android:layout_height="36dp"
         android:text="@string/nombre_funcionalidad_categorias"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/categorias_view"
-        app:layout_constraintStart_toStartOf="@+id/categorias_view" />
+        app:layout_constraintEnd_toEndOf="@+id/categorias_view"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/categorias_view"
+        app:layout_constraintTop_toBottomOf="@+id/funcionalidad_categorias_img" />
 
     <ImageView
         android:id="@+id/funcionalidad_traduccion_img"

@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/funcionalidad_escena_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="97dp"
+        android:layout_height="35dp"
         android:layout_marginStart="36dp"
         android:layout_marginBottom="4dp"
         android:text="@string/nombre_funcionalidad_escenas"
@@ -57,9 +57,9 @@
 
     <TextView
         android:id="@+id/funcionalidad_texto_nombre"
-        android:layout_width="64dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="82dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="4dp"
         android:text="@string/nombre_funcionalidad_texto"
         android:textSize="24sp"
@@ -131,8 +131,8 @@
 
     <TextView
         android:id="@+id/funcionalidad_categorias_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="134dp"
+        android:layout_height="34dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
         android:text="@string/nombre_funcionalidad_categorias"
@@ -142,8 +142,8 @@
 
     <TextView
         android:id="@+id/funcionalidad_traduccion_nombre3"
-        android:layout_width="123dp"
-        android:layout_height="28dp"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/nombre_funcionalidad_traduccion"

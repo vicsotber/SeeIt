@@ -2,6 +2,7 @@ package com.project.tfg
 
 import android.content.pm.ActivityInfo
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
@@ -25,6 +26,7 @@ class FuncionalidadesFragmentInstrumentedTest {
 
     @Before
     fun setUp() {
+        AccessibilityChecks.enable()
         Intents.init()
     }
 

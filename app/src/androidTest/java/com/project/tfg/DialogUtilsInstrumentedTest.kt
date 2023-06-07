@@ -2,6 +2,7 @@ package com.project.tfg
 
 import android.content.DialogInterface
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -17,6 +18,13 @@ class DialogUtilsInstrumentedTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    companion object {
+        @BeforeClass @JvmStatic
+        fun enableAccessibilityChecks() {
+            AccessibilityChecks.enable()
+        }
+    }
 
     @Test
     fun checkShowAlertDialog() {

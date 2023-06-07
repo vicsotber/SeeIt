@@ -2,6 +2,7 @@ package com.project.tfg
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -28,6 +29,7 @@ class LoginRegisterActivityInstrumentedTest {
 
     @Before
     fun setUp() {
+        AccessibilityChecks.enable()
         activityScenario = ActivityScenario.launch(MainActivity::class.java)
         auth = Firebase.auth
         FirebaseAuth.getInstance().signOut()
