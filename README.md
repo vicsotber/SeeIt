@@ -41,9 +41,11 @@
 
 ## About The Project
 
-SeeIt es una aplicación Android que permite a usuarios con discapacidad visual obtener descripciones de imágenes o reconocer texto en ellas entre otras funcionalidades. Está siendo desarrollada como TFG para el grado de Ingeniería del Software de la Univerdad de Sevilla. 
+SeeIt es una aplicación Android que permite a usuarios con discapacidad visual obtener descripciones de imágenes o reconocer texto en ellas entre otras funcionalidades. Está siendo desarrollada como TFG para el grado de Ingeniería del Software de la Univerdad de Sevilla.
 
-Estará disponible pronto en la PlayStore.
+Se apoya en el uso de un Proxy API que puede ver aquí: <a href="https://github.com/vicsotber/SeeItProxyApi">SeeItProxyAPI</a>
+
+Estará disponible pronto en la PlayStore. Mientras tanto puede descargar el APK disponible en la sección de releases.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
