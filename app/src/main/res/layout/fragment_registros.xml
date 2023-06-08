@@ -7,30 +7,31 @@
     tools:context="com.project.tfg.ui.funcionalidades.FuncionalidadesFragment">
 
 
-    <TextView
-        android:id="@+id/access_advice"
-        android:layout_width="344dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/access_advice"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="154dp"
         android:layout_height="169dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="36dp"
         android:contentDescription="@string/logo_seeit"
         android:src="@drawable/ic_vector_eye"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/access_advice"
+        android:layout_width="323dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/access_advice"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/access_btn"
@@ -42,4 +43,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/access_advice" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
