@@ -28,9 +28,9 @@ import com.project.tfg.ui.funcionalidades.TraducirActivity
 class RegistrosFragment : Fragment() {
 
     private var _binding: FragmentRegistrosBinding? = null
-    private lateinit var auth: FirebaseAuth
+    lateinit var auth: FirebaseAuth
     private val binding get() = _binding!!
-    private lateinit var textToSpeech: TextToSpeech
+    lateinit var textToSpeech: TextToSpeech
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -121,7 +121,7 @@ class RegistrosFragment : Fragment() {
         updateViews()
     }
 
-    private fun updateViews() {
+    fun updateViews() {
         auth = Firebase.auth
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -154,7 +154,7 @@ class RegistrosFragment : Fragment() {
         }
     }
 
-    private fun signOut()  {
+    fun signOut()  {
         FirebaseAuth.getInstance().signOut()
         convertTextToSpeech(getString(R.string.logout_correct))
         updateViews()

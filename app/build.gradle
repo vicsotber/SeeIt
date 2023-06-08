@@ -17,6 +17,12 @@ android {
         noCompress "tflite"
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     defaultConfig {
         applicationId "com.project.tfg"
         minSdkVersion 21
@@ -60,6 +66,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation 'org.robolectric:robolectric:4.6.1'
+    testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.fragment:fragment-testing:1.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

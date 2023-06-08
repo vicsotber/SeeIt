@@ -12,13 +12,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.project.tfg.R
+import org.jetbrains.annotations.TestOnly
 
 class EmailPasswordActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var textToSpeech: TextToSpeech
+    lateinit var auth: FirebaseAuth
+    lateinit var textToSpeech: TextToSpeech
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Inicializar Firebase
@@ -83,7 +84,7 @@ class EmailPasswordActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAccount(email: String, password: String) {
+    fun createAccount(email: String, password: String) {
         if (::textToSpeech.isInitialized) {
             textToSpeech.stop()
             textToSpeech.shutdown()
@@ -113,7 +114,7 @@ class EmailPasswordActivity : AppCompatActivity() {
             }
     }
 
-    private fun signIn(email: String, password: String) {
+    fun signIn(email: String, password: String) {
         if (::textToSpeech.isInitialized) {
             textToSpeech.stop()
             textToSpeech.shutdown()
@@ -146,7 +147,7 @@ class EmailPasswordActivity : AppCompatActivity() {
             }
     }
 
-    private fun validateForm(): Boolean {
+    fun validateForm(): Boolean {
         var valid = true
 
         val email: String = findViewById<EditText>(R.id.email_input).text.toString()
@@ -182,7 +183,7 @@ class EmailPasswordActivity : AppCompatActivity() {
         return valid
     }
 
-    private fun convertTextToSpeech(text: String) {
+    fun convertTextToSpeech(text: String) {
         textToSpeech = TextToSpeech(this) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 // El TextToSpeech se inicializó correctamente, ahora se puede llamar al método speak()
