@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.project.tfg.ui.funcionalidades.CategoriasActivity">
+
+    <View
+        android:id="@+id/category_plants_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="56dp"
+        android:clickable="true"
+        android:contentDescription="@string/category_plants_description"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_birds_view" />
+
+    <ImageView
+        android:id="@+id/category_plants_img"
+        android:layout_width="124dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/category_plants_view"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="@+id/category_plants_view"
+        app:layout_constraintTop_toTopOf="@+id/category_plants_view"
+        app:srcCompat="@drawable/ic_vector_plants"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/category_food_img"
+        android:layout_width="124dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/category_food_view"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="@+id/category_food_view"
+        app:layout_constraintTop_toTopOf="@+id/category_food_view"
+        app:srcCompat="@drawable/ic_vector_food"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/category_insects_img"
+        android:layout_width="124dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/category_insects_view"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="@+id/category_insects_view"
+        app:layout_constraintTop_toTopOf="@+id/category_insects_view"
+        app:srcCompat="@drawable/ic_vector_insects"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/category_food_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="124dp"
+        android:clickable="true"
+        android:contentDescription="@string/category_food_description"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/category_food_text"
+        android:layout_width="204dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/category_food"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/category_food_view"
+        app:layout_constraintEnd_toEndOf="@+id/category_food_view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/category_food_view"
+        app:layout_constraintTop_toBottomOf="@+id/category_food_img"
+        app:layout_constraintVertical_bias="0.97" />
+
+    <View
+        android:id="@+id/category_insects_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="84dp"
+        android:clickable="true"
+        android:contentDescription="@string/category_insects_description"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_food_view" />
+
+    <ImageView
+        android:id="@+id/category_birds_img"
+        android:layout_width="124dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/category_birds_view"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="@+id/category_birds_view"
+        app:layout_constraintTop_toTopOf="@+id/category_birds_view"
+        app:srcCompat="@drawable/ic_vector_birds"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/category_birds_text"
+        android:layout_width="127dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/category_birds"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="@+id/category_birds_view"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="@+id/category_birds_view"
+        app:layout_constraintTop_toBottomOf="@+id/category_birds_img" />
+
+    <TextView
+        android:id="@+id/category_insects_text"
+        android:layout_width="206dp"
+        android:layout_height="64dp"
+        android:text="@string/category_insects"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/category_insects_view"
+        app:layout_constraintEnd_toEndOf="@+id/category_insects_view"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="@+id/category_insects_view"
+        app:layout_constraintTop_toBottomOf="@+id/category_insects_img"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/category_plants_text"
+        android:layout_width="182dp"
+        android:layout_height="64dp"
+        android:text="@string/category_plants"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/category_plants_view"
+        app:layout_constraintEnd_toEndOf="@+id/category_plants_view"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toStartOf="@+id/category_plants_view"
+        app:layout_constraintTop_toBottomOf="@+id/category_plants_img"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <View
+        android:id="@+id/category_birds_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="56dp"
+        android:clickable="true"
+        android:contentDescription="@string/category_birds_description"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

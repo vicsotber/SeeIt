@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/image_placeholder"
-            android:layout_width="355dp"
-            android:layout_height="244dp"
+            android:layout_width="485dp"
+            android:layout_height="305dp"
             android:layout_marginTop="4dp"
             android:contentDescription="@string/imagen_placeholder_descripcion"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,29 +26,30 @@
 
         <TextView
             android:id="@+id/indicator_1"
-            android:layout_width="230dp"
-            android:layout_height="25dp"
+            android:layout_width="387dp"
+            android:layout_height="58dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
             android:text="@string/traduccion_resultado"
-            android:textSize="20sp"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/boton_traducir" />
 
         <TextView
             android:id="@+id/texto_resultado"
-            android:layout_width="325dp"
+            android:layout_width="525dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/indicator_1" />
 
         <Spinner
             android:id="@+id/spinner_target_language"
-            android:layout_width="328dp"
-            android:layout_height="48dp"
+            android:layout_width="442dp"
+            android:layout_height="97dp"
             android:layout_marginTop="20dp"
             android:entries="@array/paises"
             android:spinnerMode="dropdown"
@@ -58,8 +59,8 @@
 
         <Spinner
             android:id="@+id/spinner_source_language"
-            android:layout_width="331dp"
-            android:layout_height="54dp"
+            android:layout_width="442dp"
+            android:layout_height="97dp"
             android:layout_marginTop="20dp"
             android:entries="@array/paises"
             android:spinnerMode="dropdown"
@@ -69,34 +70,35 @@
 
         <TextView
             android:id="@+id/source_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="248dp"
+            android:layout_height="49dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="12dp"
             android:text="@string/source_language"
-            android:textSize="20sp"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_placeholder" />
 
         <TextView
             android:id="@+id/target_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="199dp"
+            android:layout_height="54dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="28dp"
             android:text="@string/target_language"
-            android:textSize="20sp"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_source_language" />
 
         <Button
             android:id="@+id/boton_traducir"
-            android:layout_width="249dp"
-            android:layout_height="60dp"
+            android:layout_width="534dp"
+            android:layout_height="102dp"
             android:layout_marginTop="20dp"
             android:text="@string/boton_traducir"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_target_language" />
