@@ -108,57 +108,6 @@ class TraducirActivity : BaseActivity() {
         }
     }
 
-    /*private fun translateText(data: Uri) {
-        val imagen: InputImage = InputImage.fromFilePath(this, data)
-
-        val spinnerSource = findViewById<Spinner>(R.id.spinner_source_language)
-        val sourceLanguage = spinnerSource.selectedItem as String
-
-        val spinnerTarget = findViewById<Spinner>(R.id.spinner_target_language)
-        val targetLanguage = spinnerTarget.selectedItem as String
-
-        //Realiza el reconocimiento de texto
-        recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-        recognizer.process(imagen)
-            .addOnSuccessListener { visionText ->
-                val options = TranslatorOptions.Builder()
-                    .setSourceLanguage(getLanguageCode(sourceLanguage))
-                    .setTargetLanguage(getLanguageCode(targetLanguage))
-                    .build()
-                translator = Translation.getClient(options)
-
-                //Descarga los modelos de traducción si es necesario a través de wifi
-                val conditions = DownloadConditions.Builder()
-                    .requireWifi()
-                    .build()
-                translator.downloadModelIfNeeded(conditions)
-                    .addOnSuccessListener {
-                        //Realiza la traducción del texto
-                        translator.translate(visionText.text)
-                            .addOnSuccessListener { translatedText ->
-                                traduccionResultado.setText(translatedText)
-                                val targetLocale = Locale(getLanguageCode(targetLanguage))
-                                textToSpeech.setLanguage(targetLocale)
-                                textToSpeech.speak(translatedText, TextToSpeech.QUEUE_FLUSH, null, null)
-
-                                guardarRegistro(data, visionText, translatedText)
-                            }
-                            .addOnFailureListener { exception ->
-                                traduccionResultado.text = getString(R.string.text_translation_error)
-                                convertTextToSpeech(getString(R.string.text_translation_error))
-                            }
-                    }
-                    .addOnFailureListener { exception ->
-                        traduccionResultado.text = getString(R.string.text_translation_error)
-                        convertTextToSpeech(getString(R.string.text_translation_error))
-                    }
-
-            }
-            .addOnFailureListener { _ ->
-                traduccionResultado.text = getString(R.string.text_recognition_error)
-                convertTextToSpeech(getString(R.string.text_recognition_error))
-            }
-    }*/
 
     private fun recognizeText(data: Uri) {
         val imagen: InputImage = InputImage.fromFilePath(this, data)
