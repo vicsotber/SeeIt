@@ -17,10 +17,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Pone el logo de la app en la Action Bar superior
-        //supportActionBar?.setDisplayShowHomeEnabled(true)
-        //supportActionBar?.setIcon(R.mipmap.ic_launcher_eye_round)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
