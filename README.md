@@ -55,6 +55,7 @@ Estará disponible pronto en la PlayStore. Mientras tanto puede descargar el APK
 - [![MlKit][mlkit]][mlkit-url]
 - [![Azure Cognitive Services][azure cognitive services]][azure-cognitive-services-url]
 - [![Firebase][firebase]][firebase-url]
+- [![TensorFlow][tensorflow]][tensorflow-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,7 +65,7 @@ Estará disponible pronto en la PlayStore. Mientras tanto puede descargar el APK
 
 Autor - [vicsotber](https://github.com/vicsotber) - victor.soto.berenguer123@gmail.com
 
-Project Link: [https://github.com/vicsotber/TFG](https://github.com/vicsotber/TFG)
+Project Link: [https://github.com/vicsotber/SeeIt](https://github.com/vicsotber/SeeIt)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,3 +85,5 @@ Project Link: [https://github.com/vicsotber/TFG](https://github.com/vicsotber/TF
 [azure-cognitive-services-url]: https://azure.microsoft.com/es-es/products/cognitive-services/
 [firebase]: https://img.shields.io/badge/Firebase-Built%20with%20Firebase-yellow?style=for-the-badge&logo=firebase&logoColor=white
 [firebase-url]: https://console.firebase.google.com/u/0/
+[tensorflow]: https://img.shields.io/badge/TensorFlow-TensorFlow%20Lite-orange?style=for-the-badge&logoColor=white
+[tensorflow-url]: https://www.tensorflow.org/?hl=es-419
